@@ -16,4 +16,5 @@ POUR POUVOIR UTILISER LA BASE DE DONNEES :
 
 Et voilà, normalement tu peux utiliser la base de donnée pour faire ce que tu veux.
 
-Une petite remarque, dans la base de donnée déjà présente il y a une colone MotDePasse, il faudra la modifier pour qu'elle soit crypté
+Après m'etre renseigné un peu, j'ai pus voir que cryper des données dans la base de données n'est pas forcement nécessaire
+A reverifier

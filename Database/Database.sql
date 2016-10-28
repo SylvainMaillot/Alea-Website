@@ -84,9 +84,9 @@ INSERT INTO Joueur VALUES(3,'Sylvain','Maillot',3.5);
 INSERT INTO Joueur VALUES(4,'Romain','Noto',0.0);
 
 --Table Utilisateur
-INSERT INTO Utilisateur VALUES(1,'Alea',md5('Jacta_est'),1);
-INSERT INTO Utilisateur VALUES(2,'Mamamillaaa',md5('xxx'),2);
-INSERT INTO Utilisateur VALUES(3,'Neiko',md5('Nyaa'),3);
+INSERT INTO Utilisateur VALUES(1,'Alea','Jacta_est',1);
+INSERT INTO Utilisateur VALUES(2,'Mamamillaaa','xxx',2);
+INSERT INTO Utilisateur VALUES(3,'Neiko','Nyaa',3);
 
 --Table Jeu
 INSERT INTO Jeu VALUES('1','Les contrées de l\'horreur','6','3');
@@ -95,7 +95,7 @@ INSERT INTO Jeu VALUES('1','Les contrées de l\'horreur','6','3');
 INSERT INTO Soiree VALUES('1','2016-10-31','Alea horror party','0','0');
 
 --Table Facture
-INSERT INTO Facture VALUES('1','2016-10-14','100,98','Achats de boissons Leclerc','E-Leclerc','3');
+INSERT INTO Facture VALUES('1','2016-10-14','100.98','Achats de boissons Leclerc','E-Leclerc','3');
 
 --Table Produit
 INSERT INTO Produit VALUES('1','Coca 33 cl');

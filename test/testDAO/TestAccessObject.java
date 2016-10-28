@@ -1,6 +1,7 @@
 package testDAO;
 
 import dataAccessObject.AccessObject;
+import dataAccessObject.JoueurEntity;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -67,5 +68,13 @@ public class TestAccessObject {
     public void testCountPlayers() throws SQLException {
         int nb = myDAO.nbJoueurs();
         assertEquals(4, nb);
+    }
+    
+    @Test
+    public void testLoggin() throws SQLException {
+        JoueurEntity joueur = myDAO.getJoueurByLoggin("Neiko", "Nyaa");
+        assertEquals(joueur.getPrenom(), "Sylvain");
+        joueur = myDAO.getJoueurByLoggin("Neiko", "nyaa");
+        assertEquals(joueur, null);
     }
 }

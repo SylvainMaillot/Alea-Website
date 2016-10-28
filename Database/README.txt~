@@ -12,3 +12,9 @@ POUR POUVOIR UTILISER LA BASE DE DONNEES :
 	Database: Alea
 	User Name: root
 	Password: root
+7 - Finish
+
+Et voilà, normalement tu peux utiliser la base de donnée pour faire ce que tu veux.
+
+Après m'etre renseigné un peu, j'ai pus voir que cryper des données dans la base de données n'est pas forcement nécessaire
+A reverifier 

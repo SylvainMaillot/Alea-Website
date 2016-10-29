@@ -82,5 +82,49 @@ public class AccessObject {
 
 		return result;
 	}
+        
+        /**
+	 *
+	 * @return 
+	 * @throws SQLException
+	 */
+	public boolean changePlayerLastName(String nom ,int id) throws SQLException {
+		String sql = "update Joueur set Nom = ? where ID = ?;";
+		// Ouvrir une connexion
+		Connection connection = myDataSource.getConnection();
+		// On crée un statement pour exécuter une requête
+		PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setString(1, nom);
+                stmt.setInt(2, id);
+		// Un ResultSet pour parcourir les enregistrements du résultat
+		int rs = stmt.executeUpdate();
+		// On ferme tout
+		stmt.close();
+		connection.close();
+
+		return rs != 0;
+	}
+        
+                /**
+	 *
+	 * @return 
+	 * @throws SQLException
+	 */
+	public boolean changePlayerFristName(String prenom ,int id) throws SQLException {
+		String sql = "update Joueur set Prenom = ? where ID = ?;";
+		// Ouvrir une connexion
+		Connection connection = myDataSource.getConnection();
+		// On crée un statement pour exécuter une requête
+		PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setString(1, prenom);
+                stmt.setInt(2, id);
+		// Un ResultSet pour parcourir les enregistrements du résultat
+		int rs = stmt.executeUpdate();
+		// On ferme tout
+		stmt.close();
+		connection.close();
+
+		return rs != 0;
+	}
     
 }

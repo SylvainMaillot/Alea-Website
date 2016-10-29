@@ -71,9 +71,27 @@ public class TestAccessObject {
     }
     
     @Test
+    public void testUpdateNom() throws SQLException {
+        JoueurEntity joueur = myDAO.getJoueurByLoggin("Neiko", "Nyaa");
+        assertTrue(myDAO.changePlayerLastName("Chiwa", joueur.getJoueurID()));
+        joueur = myDAO.getJoueurByLoggin("Neiko", "Nyaa");
+        assertEquals(joueur.getNom(), "Chiwa");
+        assertFalse(myDAO.changePlayerLastName("Chiwa", 7));
+    }
+   
+    @Test
+    public void testUpdatePrenom() throws SQLException {
+        JoueurEntity joueur = myDAO.getJoueurByLoggin("Neiko", "Nyaa");
+        assertTrue(myDAO.changePlayerFristName("Chiwa", joueur.getJoueurID()));
+        joueur = myDAO.getJoueurByLoggin("Neiko", "Nyaa");
+        assertEquals(joueur.getPrenom(), "Chiwa");
+        assertFalse(myDAO.changePlayerFristName("Chiwa", 7));
+    }
+    
+    @Test
     public void testLoggin() throws SQLException {
         JoueurEntity joueur = myDAO.getJoueurByLoggin("Neiko", "Nyaa");
-        assertEquals(joueur.getPrenom(), "Sylvain");
+        assertEquals(joueur.getPrenom(), "Chiwa");
         joueur = myDAO.getJoueurByLoggin("Neiko", "nyaa");
         assertEquals(joueur, null);
     }

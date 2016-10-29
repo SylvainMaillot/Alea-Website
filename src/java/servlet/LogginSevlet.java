@@ -56,7 +56,7 @@ public class LogginSevlet extends HttpServlet {
                 request.setAttribute("nom", je.getNom());
                 request.setAttribute("prenom", je.getPrenom());
                 request.setAttribute("contrib", je.getContribution());
-                request.getRequestDispatcher("logginWorks.jsp").forward(request, response);
+                request.getRequestDispatcher("playerInfos.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("logginFails.jsp").forward(request, response);
             }

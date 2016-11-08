@@ -2,7 +2,7 @@ package servlet;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
 import dataAccessObject.AccessObject;
-import dataAccessObject.JoueurEntity;
+import dataAccessObject.UtilisateurEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -18,7 +18,7 @@ import javax.sql.DataSource;
  *
  * @author neiko
  */
-public class LogginSevlet extends HttpServlet {
+public class LogginServlet extends HttpServlet {
     
     	public DataSource getDataSource() throws SQLException {
 		com.mysql.jdbc.jdbc2.optional.MysqlDataSource ds = new MysqlConnectionPoolDataSource();
@@ -51,7 +51,7 @@ public class LogginSevlet extends HttpServlet {
         if (identifiant == null && mdp == null) {
             request.getRequestDispatcher("logginForm.jsp").forward(request, response);
         } else {
-            JoueurEntity je = ao.getJoueurByLoggin(identifiant, mdp);
+            UtilisateurEntity je = ao.getUtilisateurByLoggin(identifiant, mdp);
             if (je != null) {
                 request.setAttribute("nom", je.getNom());
                 request.setAttribute("prenom", je.getPrenom());
@@ -61,7 +61,6 @@ public class LogginSevlet extends HttpServlet {
                 request.getRequestDispatcher("logginFails.jsp").forward(request, response);
             }
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,7 +78,7 @@ public class LogginSevlet extends HttpServlet {
                 try {
                     processRequest(request, response);
                 } catch (SQLException ex) {
-                    Logger.getLogger(LogginSevlet.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LogginServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
     }
 
@@ -97,7 +96,7 @@ public class LogginSevlet extends HttpServlet {
                 try {
                     processRequest(request, response);
                 } catch (SQLException ex) {
-                    Logger.getLogger(LogginSevlet.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LogginServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
     }
 

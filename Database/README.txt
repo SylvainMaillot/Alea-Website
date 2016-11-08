@@ -4,7 +4,7 @@ POUR POUVOIR UTILISER LA BASE DE DONNEES :
 2 - Lancer mysql à l'aide de la commande : mysql --host=localhost --user=root --password=root (Le mdp que tu as défini)
 3 - Lancer la base de données à l'aide de la commande : source Database.sql (Il faut etre dans le dossier)
 
-	Sous netBeans !
+    Sous netBeans !
 4 - Aller dans l'onglet Services -> DataBase -> (Clic droit) New Connection
 5 - Driver : MySQL / Driver File : Normalement t'as pas besoin d'y toucher
 6 -	DriverName : Pas touche

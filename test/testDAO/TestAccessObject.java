@@ -1,7 +1,7 @@
 package testDAO;
 
 import dataAccessObject.AccessObject;
-import dataAccessObject.JoueurEntity;
+import dataAccessObject.UtilisateurEntity;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -66,33 +66,33 @@ public class TestAccessObject {
 
     @Test
     public void testCountPlayers() throws SQLException {
-        int nb = myDAO.nbJoueurs();
+        int nb = myDAO.nbUtilisateurs();
         assertEquals(4, nb);
     }
     
     @Test
     public void testUpdateNom() throws SQLException {
-        JoueurEntity joueur = myDAO.getJoueurByLoggin("Neiko", "Nyaa");
-        assertTrue(myDAO.changePlayerLastName("Chiwa", joueur.getJoueurID()));
-        joueur = myDAO.getJoueurByLoggin("Neiko", "Nyaa");
-        assertEquals(joueur.getNom(), "Chiwa");
+        UtilisateurEntity joueur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
+        assertTrue(myDAO.changePlayerLastName("Nom", joueur.getUserId()));
+        joueur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
+        assertEquals(joueur.getNom(), "Nom");
         assertFalse(myDAO.changePlayerLastName("Chiwa", 7));
     }
    
     @Test
     public void testUpdatePrenom() throws SQLException {
-        JoueurEntity joueur = myDAO.getJoueurByLoggin("Neiko", "Nyaa");
-        assertTrue(myDAO.changePlayerFristName("Chiwa", joueur.getJoueurID()));
-        joueur = myDAO.getJoueurByLoggin("Neiko", "Nyaa");
-        assertEquals(joueur.getPrenom(), "Chiwa");
-        assertFalse(myDAO.changePlayerFristName("Chiwa", 7));
+        UtilisateurEntity joueur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
+        assertTrue(myDAO.changePlayerFristName("Prenom", joueur.getUserId()));
+        joueur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
+        assertEquals(joueur.getPrenom(), "Prenom");
+        assertFalse(myDAO.changePlayerFristName("Blabla", 7));
     }
     
     @Test
     public void testLoggin() throws SQLException {
-        JoueurEntity joueur = myDAO.getJoueurByLoggin("Neiko", "Nyaa");
-        assertEquals(joueur.getPrenom(), "Chiwa");
-        joueur = myDAO.getJoueurByLoggin("Neiko", "nyaa");
+        UtilisateurEntity joueur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
+        assertEquals(joueur.getPrenom(), "Prenom");
+        joueur = myDAO.getUtilisateurByLoggin("Neiko", "nyaa");
         assertEquals(joueur, null);
     }
 }

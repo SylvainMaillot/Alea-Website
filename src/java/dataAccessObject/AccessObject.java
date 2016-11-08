@@ -28,10 +28,10 @@ public class AccessObject {
 	 * @return le nombre d'enregistrements dans la table JOUEUR
 	 * @throws SQLException
 	 */
-	public int nbJoueurs() throws SQLException {
+	public int nbUtilisateurs() throws SQLException {
 		int result = 0;
 
-		String sql = "SELECT COUNT(*) AS NUMBER FROM Joueur";
+		String sql = "SELECT COUNT(*) AS NUMBER FROM Utilisateur";
 		// Ouvrir une connexion
 		Connection connection = myDataSource.getConnection();
 		// On crée un statement pour exécuter une requête
@@ -55,11 +55,11 @@ public class AccessObject {
 	 * @return 
 	 * @throws SQLException
 	 */
-	public JoueurEntity getJoueurByLoggin(String ident, String psswd) throws SQLException {
-		JoueurEntity result = null;
-		String sql = "select * from Joueur\n" +
-                "join Utilisateur on Joueur.ID = Utilisateur.JoueurID\n" +
-                "where Utilisateur.Identifiant = ? and Utilisateur.MotDePasse = ?";
+	public UtilisateurEntity getUtilisateurByLoggin(String ident, String 
+                    psswd) throws SQLException {
+		UtilisateurEntity result = null;
+		String sql = "select * from Utilisateur\n" +
+                "where Identifiant = ? and MotDePasse = ?";
 		// Ouvrir une connexion
 		Connection connection = myDataSource.getConnection();
 		// On crée un statement pour exécuter une requête
@@ -69,11 +69,18 @@ public class AccessObject {
 		// Un ResultSet pour parcourir les enregistrements du résultat
 		ResultSet rs = stmt.executeQuery();
 		if (rs.next()) {
-                        int id = rs.getInt("ID");
-                        String nom = rs.getString("Nom");
-                        String prenom = rs.getString("Prenom");
+                        int UserId = rs.getInt("ID");
+                        String Identifiant = rs.getString("Identifiant");
+                        String MotDePasse = rs.getString("MotDePasse"); 
+                        String Email = rs.getString("Email");
+                        String Nom = rs.getString("Nom");
+                        String Prenom = rs.getString("Prenom");
+                        double Contribution = rs.getDouble("Contribution");
+                        int TypeUtilisateur = rs.getInt("TypeUtilisateur");
+                        
                         double contribution = rs.getDouble("Contribution");
-                        result = new JoueurEntity(id, nom, prenom, contribution);
+                        result = new UtilisateurEntity(UserId, Identifiant, MotDePasse,
+                                Email, Prenom, Nom, Contribution, TypeUtilisateur);
 		}
 		// On ferme tout
 		rs.close();
@@ -89,7 +96,7 @@ public class AccessObject {
 	 * @throws SQLException
 	 */
 	public boolean changePlayerLastName(String nom ,int id) throws SQLException {
-		String sql = "update Joueur set Nom = ? where ID = ?;";
+		String sql = "update Utilisateur set Nom = ? where ID = ?;";
 		// Ouvrir une connexion
 		Connection connection = myDataSource.getConnection();
 		// On crée un statement pour exécuter une requête
@@ -111,7 +118,7 @@ public class AccessObject {
 	 * @throws SQLException
 	 */
 	public boolean changePlayerFristName(String prenom ,int id) throws SQLException {
-		String sql = "update Joueur set Prenom = ? where ID = ?;";
+		String sql = "update Utilisateur set Prenom = ? where ID = ?;";
 		// Ouvrir une connexion
 		Connection connection = myDataSource.getConnection();
 		// On crée un statement pour exécuter une requête

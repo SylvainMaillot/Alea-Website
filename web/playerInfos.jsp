@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <p>Bonjour ${prenom} ${nom} vous avez donnez ${contrib} € à Alea :) </p>
+        <p>Bonjour ${prenom} ${nom} vous avez donné ${contrib} € à Alea :) </p>
     </body>
 </html>

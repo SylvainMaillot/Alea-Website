@@ -70,52 +70,29 @@ public class TestUtilisateurObject {
         assertEquals(4, nb);
     }
     
-    
-    //Petit soucis avec ce test
     @Test
     public void testLoggin() throws SQLException {
         UtilisateurEntity utilisateur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
-        assertEquals(utilisateur.getPrenom(), "Prenom");
+        assertEquals(utilisateur.getPrenom(), "Sylvain");
         utilisateur = myDAO.getUtilisateurByLoggin("Neiko", "nyaa");
         assertEquals(utilisateur, null);
     }
     
     @Test
-    public void testUpdateNom() throws SQLException {
-        UtilisateurEntity utilisateur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
-        assertTrue(myDAO.updateUtilisateurLastName("Nom", utilisateur.getUserId()));
-        utilisateur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
-        assertEquals(utilisateur.getNom(), "Nom");
-        assertFalse(myDAO.updateUtilisateurLastName("Chiwa", 7));
-    }
-   
-    @Test
-    public void testUpdatePrenom() throws SQLException {
-        UtilisateurEntity utilisateur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
-        assertTrue(myDAO.updateUtilisateurFristName("Prenom", utilisateur.getUserId()));
-        utilisateur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
-        assertEquals(utilisateur.getPrenom(), "Prenom");
-        assertFalse(myDAO.updateUtilisateurFristName("Blabla", 7));
-    }
-    
-    @Test
-    public void testUpdateMail() throws SQLException {
-        UtilisateurEntity utilisateur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
-        assertTrue(myDAO.updateUtilisateurMail("test@hotmail.fr", utilisateur.getUserId()));
-        utilisateur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
-        assertEquals(utilisateur.getEmail(), "test@hotmail.fr");
-        assertFalse(myDAO.updateUtilisateurMail("test@hotmail.fr", 7));
-    }
-    
-    @Test
-    public void testUpdateContribution() throws SQLException {
-        float newContrib = 5.95f;
+    public void testUpdate() throws SQLException {
+        String MotDePasse = "abc"; 
+        String Email = "ca@ca";
+        String Prenom = "Chips"; 
+        String Nom = "Lord";
         
         UtilisateurEntity utilisateur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
-        assertTrue(myDAO.updateUtilisateurContribution(newContrib, utilisateur.getUserId()));
-        utilisateur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
-        System.out.println(utilisateur.getContribution());
-        assertFalse(myDAO.updateUtilisateurContribution(newContrib, 7));
+        assertTrue(myDAO.updateUtilisateur(Nom, Prenom, MotDePasse, Email, utilisateur.getUserId()));
+        
+        UtilisateurEntity utilisateur2 = myDAO.getUtilisateurByLoggin("Neiko", "abc");
+        assertEquals(utilisateur2.getEmail(), Email);
+        assertEquals(utilisateur2.getMotDePasse(), MotDePasse);
+        assertEquals(utilisateur2.getPrenom(), Prenom);
+        assertEquals(utilisateur2.getNom(), Nom);
     }
     
 }

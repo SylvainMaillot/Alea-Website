@@ -91,68 +91,19 @@ public class AccessUtilisateurObject {
 		return result;
 	}
         
-        /**
-	 * @param nom Nouveau nom
-         * @param id Id de l'utilisateur
-	 * @return un boolean qui verifie si le nom à été changé
-	 * @throws SQLException
-	 */
-	public boolean updateUtilisateurLastName(String nom ,int id) throws SQLException {
-		String sql = "update Utilisateur set Nom = ? where ID = ?;";
+       public boolean updateUtilisateur(String nom, String prenom, String psswd,
+               String mail, int id) throws SQLException {
+		String sql = "update Utilisateur set Nom = ?, Prenom = ?,"
+                        + "MotDePasse = ?, Email = ? where ID = ?;";
 		// Ouvrir une connexion
 		Connection connection = myDataSource.getConnection();
 		// On crée un statement pour exécuter une requête
 		PreparedStatement stmt = connection.prepareStatement(sql);
-                stmt.setString(1, nom);
-                stmt.setInt(2, id);
-		// Un ResultSet pour parcourir les enregistrements du résultat
-		int rs = stmt.executeUpdate();
-		// On ferme tout
-		stmt.close();
-		connection.close();
-
-		return rs != 0;
-	}
-        
-        /**
-	* @param prenom Nouveau prenom
-        * @param id Id de l'utilisateur
-	* @return un boolean qui verifie si le prenom à été changé
-	* @throws SQLException
-	*/
-	public boolean updateUtilisateurFristName(String prenom ,int id) throws SQLException {
-		String sql = "update Utilisateur set Prenom = ? where ID = ?;";
-		// Ouvrir une connexion
-		Connection connection = myDataSource.getConnection();
-		// On crée un statement pour exécuter une requête
-		PreparedStatement stmt = connection.prepareStatement(sql);
-                stmt.setString(1, prenom);
-                stmt.setInt(2, id);
-		// Un ResultSet pour parcourir les enregistrements du résultat
-		int rs = stmt.executeUpdate();
-		// On ferme tout
-		stmt.close();
-		connection.close();
-
-		return rs != 0;
-	}
-        
-        //A TESTER
-        
-        /**
-	* @param psswd Nouveau mot de pase
-        * @param id Id de l'utilisateur
-	* @return un boolean qui verifie si le mdp à été changé
-	* @throws SQLException
-	*/
-	public boolean updateUtilisateurPassword(String psswd ,int id) throws SQLException {
-		String sql = "update Utilisateur set MotDePasse = ? where ID = ?;";
-		// Ouvrir une connexion
-		Connection connection = myDataSource.getConnection();
-		// On crée un statement pour exécuter une requête
-		PreparedStatement stmt = connection.prepareStatement(sql);
-                stmt.setString(1, psswd);
-                stmt.setInt(2, id);
+                stmt.setString(1,nom);
+                stmt.setString(2,prenom);
+                stmt.setString(3,psswd);
+                stmt.setString(4,mail);
+                stmt.setInt(5, id);
 		// Un ResultSet pour parcourir les enregistrements du résultat
 		int rs = stmt.executeUpdate();
 		// On ferme tout
@@ -160,54 +111,5 @@ public class AccessUtilisateurObject {
 		connection.close();
                 
 		return rs != 0;
-	}
-        
-        /**
-	* @param mail Nouvelle adresse email
-        * @param id Id de l'utilisateur
-	* @return un boolean qui verifie si le mail à été changé
-	* @throws SQLException
-	*/
-	public boolean updateUtilisateurMail(String mail ,int id) throws SQLException {
-		String sql = "update Utilisateur set Email = ? where ID = ?;";
-		// Ouvrir une connexion
-		Connection connection = myDataSource.getConnection();
-		// On crée un statement pour exécuter une requête
-		PreparedStatement stmt = connection.prepareStatement(sql);
-                stmt.setString(1, mail);
-                stmt.setInt(2, id);
-		// Un ResultSet pour parcourir les enregistrements du résultat
-		int rs = stmt.executeUpdate();
-		// On ferme tout
-		stmt.close();
-		connection.close();
-                
-		return rs != 0;
-	}
-        
-        //Peut etre à changer
-        
-        /**
-	* @param contrib Nouvelle contribution
-        * @param id Id de l'utilisateur
-	* @return un boolean qui verifie si la contribution à été changé
-	* @throws SQLException
-	*/
-	public boolean updateUtilisateurContribution(float contrib ,int id) throws SQLException {
-		String sql = "update Utilisateur set Contribution = ? where ID = ?;";
-		// Ouvrir une connexion
-		Connection connection = myDataSource.getConnection();
-		// On crée un statement pour exécuter une requête
-		PreparedStatement stmt = connection.prepareStatement(sql);
-                stmt.setFloat(1, contrib);
-                stmt.setInt(2, id);
-		// Un ResultSet pour parcourir les enregistrements du résultat
-		int rs = stmt.executeUpdate();
-		// On ferme tout
-		stmt.close();
-		connection.close();
-                
-		return rs != 0;
-	}
-        
+	} 
 }

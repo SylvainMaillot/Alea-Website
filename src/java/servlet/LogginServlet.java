@@ -1,7 +1,7 @@
 package servlet;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
-import dataAccessObject.AccessObject;
+import dataAccessObject.AccessUtilisateurObject;
 import dataAccessObject.UtilisateurEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,7 +46,7 @@ public class LogginServlet extends HttpServlet {
         
         String identifiant = request.getParameter("id");
         String mdp = request.getParameter("pass");
-        AccessObject ao = new AccessObject(getDataSource());
+        AccessUtilisateurObject ao = new AccessUtilisateurObject(getDataSource());
         
         if (identifiant == null && mdp == null) {
             request.getRequestDispatcher("logginForm.jsp").forward(request, response);

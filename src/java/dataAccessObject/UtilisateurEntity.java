@@ -12,11 +12,11 @@ public class UtilisateurEntity {
         private String Email;
         private String Prenom; 
         private String Nom;
-        private double Contribution;
+        private float Contribution;
         private int TypeUtilisateur;
 
     public UtilisateurEntity(int UserId, String Identifiant, String MotDePasse, 
-                String Email, String Prenom, String Nom, double Contribution, 
+                String Email, String Prenom, String Nom, float Contribution, 
                 int TypeUtilisateur) {
         this.UserId = UserId;
         this.Identifiant = Identifiant;
@@ -52,7 +52,7 @@ public class UtilisateurEntity {
         return Nom;
     }
 
-    public double getContribution() {
+    public float getContribution() {
         return Contribution;
     }
 

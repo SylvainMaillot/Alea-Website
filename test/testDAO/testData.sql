@@ -16,7 +16,7 @@ CREATE TABLE Utilisateur(ID INTEGER IDENTITY,
                             Email VARCHAR(80),
                             Prenom VARCHAR(20) NOT NULL, 
                             Nom VARCHAR(30) NOT NULL,
-                            Contribution DECIMAL,
+                            Contribution DECIMAL(4,2),
                             TypeUtilisateur INT);
 
 CREATE TABLE Jeu(ID INTEGER IDENTITY,

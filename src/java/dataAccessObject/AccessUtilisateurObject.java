@@ -92,9 +92,10 @@ public class AccessUtilisateurObject {
 	}
         
        public boolean updateUtilisateur(String nom, String prenom, String psswd,
-               String mail, int id) throws SQLException {
+               String mail, float contrib, int type, int id) throws SQLException {
 		String sql = "update Utilisateur set Nom = ?, Prenom = ?,"
-                        + "MotDePasse = ?, Email = ? where ID = ?;";
+                        + "MotDePasse = ?, Email = ?, Contribution = ?,"
+                        + "TypeUtilisateur = ? where ID = ?;";
 		// Ouvrir une connexion
 		Connection connection = myDataSource.getConnection();
 		// On crée un statement pour exécuter une requête
@@ -103,7 +104,9 @@ public class AccessUtilisateurObject {
                 stmt.setString(2,prenom);
                 stmt.setString(3,psswd);
                 stmt.setString(4,mail);
-                stmt.setInt(5, id);
+                stmt.setFloat(5,contrib);
+                stmt.setInt(6,type);
+                stmt.setInt(7, id);
 		// Un ResultSet pour parcourir les enregistrements du résultat
 		int rs = stmt.executeUpdate();
 		// On ferme tout

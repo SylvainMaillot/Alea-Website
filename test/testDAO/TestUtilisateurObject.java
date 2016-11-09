@@ -84,15 +84,19 @@ public class TestUtilisateurObject {
         String Email = "ca@ca";
         String Prenom = "Chips"; 
         String Nom = "Lord";
+        float contrib = 3.5f;
+        int type = 1;
         
         UtilisateurEntity utilisateur = myDAO.getUtilisateurByLoggin("Neiko", "Nyaa");
-        assertTrue(myDAO.updateUtilisateur(Nom, Prenom, MotDePasse, Email, utilisateur.getUserId()));
+        assertTrue(myDAO.updateUtilisateur(Nom, Prenom, MotDePasse, Email, 
+                contrib, type,utilisateur.getUserId()));
         
         UtilisateurEntity utilisateur2 = myDAO.getUtilisateurByLoggin("Neiko", "abc");
         assertEquals(utilisateur2.getEmail(), Email);
         assertEquals(utilisateur2.getMotDePasse(), MotDePasse);
         assertEquals(utilisateur2.getPrenom(), Prenom);
         assertEquals(utilisateur2.getNom(), Nom);
+        assertEquals(utilisateur2.getTypeUtilisateur(), type);
     }
     
 }

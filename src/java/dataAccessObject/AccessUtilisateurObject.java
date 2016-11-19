@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
@@ -80,7 +82,6 @@ public class AccessUtilisateurObject {
                         String Prenom = rs.getString("Prenom");
                         float Contribution = rs.getFloat("Contribution");
                         int TypeUtilisateur = rs.getInt("TypeUtilisateur");
-                        
                         double contribution = rs.getDouble("Contribution");
                         result = new UtilisateurEntity(UserId, Identifiant, MotDePasse,
                                 Email, Prenom, Nom, Contribution, TypeUtilisateur);
@@ -122,7 +123,7 @@ public class AccessUtilisateurObject {
                String psswd,String mail) throws SQLException {
                
 		String sql = "INSERT INTO Utilisateur(Identifiant,MotDePasse,Email,"
-                        + "Prenom,Nom,Contribution,TypeUtilisateur) VALUES (?,md5(?),"
+                        + "Prenom,Nom,Contribution,TypeUtilisateur) VALUES (?,?,"
                         + "?,?,?,?,?)";
                     // Ouvrir une connexion
                     Connection connection = myDataSource.getConnection();
@@ -144,4 +145,47 @@ public class AccessUtilisateurObject {
 		connection.close();
 		return rs != 0;
 	}
+       
+       public ArrayList<UtilisateurEntity> listUtilisateur() throws SQLException {
+            ArrayList<UtilisateurEntity> result = new ArrayList<>();
+            String sql = "select * from Utilisateur";
+            Connection connection = myDataSource.getConnection();
+            // On crée un statement pour exécuter une requête
+            Statement stmt = connection.createStatement();
+            // Un ResultSet pour parcourir les enregistrements du résultat
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()) {
+                int UserId = rs.getInt("ID");
+                String Identifiant = rs.getString("Identifiant");
+                String MotDePasse = rs.getString("MotDePasse"); 
+                String Email = rs.getString("Email");
+                String Nom = rs.getString("Nom");
+                String Prenom = rs.getString("Prenom");
+                float Contribution = rs.getFloat("Contribution");
+                int TypeUtilisateur = rs.getInt("TypeUtilisateur");
+                double contribution = rs.getDouble("Contribution");
+                UtilisateurEntity u = new UtilisateurEntity(UserId, Identifiant, 
+                    MotDePasse,Email, Prenom, Nom, Contribution, TypeUtilisateur);
+                result.add(u);
+            }
+            stmt.close();
+            connection.close();
+            return result;
+       }
+       
+       public boolean suprUtilisateur(int id) throws SQLException {
+           boolean result = true;
+           String sql = "delete from Utilisateur where id = ?";
+           Connection connection = myDataSource.getConnection();
+           PreparedStatement stmt = connection.prepareStatement(sql);
+           stmt.setInt(1, id);
+           try {
+                stmt.execute();
+           } catch (SQLException e) {
+                result = false;
+           }
+           stmt.close();
+           connection.close();
+           return result;
+       }
 }

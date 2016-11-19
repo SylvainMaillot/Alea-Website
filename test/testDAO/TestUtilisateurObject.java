@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.sql.DataSource;
 import org.hsqldb.cmdline.SqlFile;
 import org.hsqldb.cmdline.SqlToolError;
@@ -67,7 +68,7 @@ public class TestUtilisateurObject {
     @Test
     public void testCountPlayers() throws SQLException {
         int nb = myDAO.nbUtilisateurs();
-        assertEquals(4, nb);
+        assertEquals(5, nb);
     }
     
     @Test
@@ -97,6 +98,24 @@ public class TestUtilisateurObject {
         assertEquals(utilisateur2.getPrenom(), Prenom);
         assertEquals(utilisateur2.getNom(), Nom);
         assertEquals(utilisateur2.getTypeUtilisateur(), type);
+    }
+    
+    @Test
+    public void testNewUser() throws SQLException {
+        String ident = "Neiw";
+        String MotDePasse = "mdp"; 
+        String Email = "ca@ca.fr";
+        String Prenom = "Haku"; 
+        String Nom = "Byako";
+        assertTrue(myDAO.newUtilisateur(ident, Nom, Prenom, MotDePasse, Email));
+        UtilisateurEntity us1 = myDAO.getUtilisateurByLoggin(ident, MotDePasse);
+        assertEquals(Prenom, us1.getPrenom());
+    }
+    
+    @Test
+    public void testListUser() throws SQLException {
+        ArrayList<UtilisateurEntity> userList = myDAO.listUtilisateur();
+        assertEquals(userList.size(), myDAO.nbUtilisateurs());
     }
     
 }

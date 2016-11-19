@@ -122,7 +122,7 @@ public class AccessUtilisateurObject {
                String psswd,String mail) throws SQLException {
                
 		String sql = "INSERT INTO Utilisateur(Identifiant,MotDePasse,Email,"
-                        + "Prenom,Nom,Contribution,TypeUtilisateur) VALUES (?,?,"
+                        + "Prenom,Nom,Contribution,TypeUtilisateur) VALUES (?,md5(?),"
                         + "?,?,?,?,?)";
                     // Ouvrir une connexion
                     Connection connection = myDataSource.getConnection();

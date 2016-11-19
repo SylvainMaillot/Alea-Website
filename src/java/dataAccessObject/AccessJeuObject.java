@@ -69,4 +69,116 @@ public class AccessJeuObject {
 
 		return result;
 	}
+    
+    public boolean updateJeu(String nom, int njmi, int njma,
+               String desc, int prop, int id) throws SQLException {
+		String sql = "update Jeu set Nom = ?, NbJoueurMin = ?,"
+                        + "NbJoueurMax = ?, Description = ?, Proprietaire = ?"
+                        + "where ID = ?;";
+		// Ouvrir une connexion
+		Connection connection = myDataSource.getConnection();
+		// On crée un statement pour exécuter une requête
+		PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setString(1,nom);
+                stmt.setInt(2,njmi);
+                stmt.setInt(3,njma);
+                stmt.setString(4,desc);
+                stmt.setInt(5,prop);
+                stmt.setInt(6,id);
+		// Un ResultSet pour parcourir les enregistrements du résultat
+		int rs = stmt.executeUpdate();
+		// On ferme tout
+		stmt.close();
+		connection.close();
+                
+		return rs != 0;
+	}
+    
+    public boolean addJeu(String nom, int njmi, int njma,
+               String desc, int prop) throws SQLException {
+               
+		String sql = "INSERT INTO Jeu(Nom,NbJoueurMin,NbJoueurMax,"
+                        + "Description,Proprietaire) VALUES (?,?,"
+                        + "?,?,?)";
+                    // Ouvrir une connexion
+                    Connection connection = myDataSource.getConnection();
+                    // On crée un statement pour exécuter une requête
+                    PreparedStatement stmt = connection.prepareStatement(sql);
+                    
+                    stmt.setString(1,nom);
+                    stmt.setInt(2,njmi);
+                    stmt.setInt(3,njma);
+                    stmt.setString(4,desc);
+                    stmt.setInt(5,prop);
+                
+                int rs = stmt.executeUpdate();
+                stmt.close();
+		connection.close();
+		return rs != 0;
+	}
+    
+    public boolean rmJeu(int id) throws SQLException {
+           boolean result = true;
+           String sql = "delete from Jeu where id = ?";
+           Connection connection = myDataSource.getConnection();
+           PreparedStatement stmt = connection.prepareStatement(sql);
+           stmt.setInt(1, id);
+           try {
+                stmt.execute();
+           } catch (SQLException e) {
+                result = false;
+           }
+           stmt.close();
+           connection.close();
+           return result;
+       }
+    
+    public ArrayList<JeuEntity> listJeu() throws SQLException {
+            ArrayList<JeuEntity> result = new ArrayList<>();
+            String sql = "select * from Jeu";
+            Connection connection = myDataSource.getConnection();
+            // On crée un statement pour exécuter une requête
+            Statement stmt = connection.createStatement();
+            // Un ResultSet pour parcourir les enregistrements du résultat
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()) {
+                int JeuId = rs.getInt("ID");
+                String nom = rs.getString("Nom");
+                int njmi = rs.getInt("NbJoueurMin"); 
+                int njma = rs.getInt("NbJoueurMax");
+                String desc = rs.getString("Description");
+                int prop = rs.getInt("Proprietaire");
+                
+                JeuEntity j = new JeuEntity(JeuId, nom, njmi, njma, desc, prop);
+                result.add(j);
+            }
+            stmt.close();
+            connection.close();
+            return result;
+       }
+    
+    public ArrayList<JeuEntity> listJeuUtilisateur(int id) throws SQLException {
+            ArrayList<JeuEntity> result = new ArrayList<>();
+            String sql = "select * from Jeu where Proprietaire = ?";
+            Connection connection = myDataSource.getConnection();
+            // On crée un statement pour exécuter une requête
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            // Un ResultSet pour parcourir les enregistrements du résultat
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                int JeuId = rs.getInt("ID");
+                String nom = rs.getString("Nom");
+                int njmi = rs.getInt("NbJoueurMin"); 
+                int njma = rs.getInt("NbJoueurMax");
+                String desc = rs.getString("Description");
+                int prop = rs.getInt("Proprietaire");
+                
+                JeuEntity j = new JeuEntity(JeuId, nom, njmi, njma, desc, prop);
+                result.add(j);
+            }
+            stmt.close();
+            connection.close();
+            return result;
+       }
 }

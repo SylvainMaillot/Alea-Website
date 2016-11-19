@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sql.DataSource;
 
 /**
@@ -114,5 +116,32 @@ public class AccessUtilisateurObject {
 		connection.close();
                 
 		return rs != 0;
-	} 
+	}
+       
+       public boolean newUtilisateur(String ident, String nom, String prenom, 
+               String psswd,String mail) throws SQLException {
+               
+		String sql = "INSERT INTO Utilisateur(Identifiant,MotDePasse,Email,"
+                        + "Prenom,Nom,Contribution,TypeUtilisateur) VALUES (?,?,"
+                        + "?,?,?,?,?)";
+                    // Ouvrir une connexion
+                    Connection connection = myDataSource.getConnection();
+                    // On crée un statement pour exécuter une requête
+                    PreparedStatement stmt = connection.prepareStatement(sql);
+
+                    float contrib = 0.0f;
+                    int type = 0;
+                    stmt.setString(1,ident);
+                    stmt.setString(2,psswd);
+                    stmt.setString(3,mail);
+                    stmt.setString(4,prenom);
+                    stmt.setString(5,nom);
+                    stmt.setFloat(6,contrib);
+                    stmt.setInt(7,type);
+                
+                int rs = stmt.executeUpdate();
+                stmt.close();
+		connection.close();
+		return rs != 0;
+	}
 }

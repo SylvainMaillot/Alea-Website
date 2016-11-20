@@ -26,29 +26,31 @@ public class AccessProgrammeObject {
     }
     
     public boolean addJeu2Soiree(int soireeID, int jeuID) throws SQLException {
-               
-		String sql = "INSERT INTO Programme VALUES (?,?)";
+		boolean result = true;
+                String sql = "INSERT INTO Programme VALUES (?,?)";
                     // Ouvrir une connexion
                     Connection connection = myDataSource.getConnection();
                     // On crée un statement pour exécuter une requête
                     PreparedStatement stmt = connection.prepareStatement(sql);
-                    
                     stmt.setInt(1,soireeID);
                     stmt.setInt(2,jeuID);
-                
-                int rs = stmt.executeUpdate();
+                try {
+                    int rs = stmt.executeUpdate();
+                } catch (SQLException s) {
+                    result = false;
+                }
                 stmt.close();
 		connection.close();
-		return rs != 0;
+		return result;
 	}
      
      public boolean rmJeu2Soiree(int soireeID, int jeuID) throws SQLException {
            boolean result = true;
-           String sql = "delete from Programme where SoireeID = ? and JeuID";
+           String sql = "delete from Programme where SoireeID = ? and JeuID = ?";
            Connection connection = myDataSource.getConnection();
            PreparedStatement stmt = connection.prepareStatement(sql);
            stmt.setInt(1, soireeID);
-           stmt.setInt(1, jeuID);
+           stmt.setInt(2, jeuID);
            try {
                 stmt.execute();
            } catch (SQLException e) {

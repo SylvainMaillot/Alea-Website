@@ -37,7 +37,8 @@ CREATE TABLE Soiree(ID INTEGER IDENTITY,
 CREATE TABLE Programme( SoireeID INT,
                         JeuID INT,
 			FOREIGN KEY (SoireeID) REFERENCES Soiree(ID) ON DELETE CASCADE,
-			FOREIGN KEY (JeuID) REFERENCES Jeu(ID) ON DELETE CASCADE
+			FOREIGN KEY (JeuID) REFERENCES Jeu(ID) ON DELETE CASCADE,
+                        PRIMARY KEY (SoireeID, JeuID)
 			);
 
 /*Contraintes d'intégrités

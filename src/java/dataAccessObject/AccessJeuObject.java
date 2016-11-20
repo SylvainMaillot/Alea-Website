@@ -119,7 +119,7 @@ public class AccessJeuObject {
     
     public boolean rmJeu(int id) throws SQLException {
            boolean result = true;
-           String sql = "delete from Jeu where id = ?";
+           String sql = "delete from Jeu where ID = ?";
            Connection connection = myDataSource.getConnection();
            PreparedStatement stmt = connection.prepareStatement(sql);
            stmt.setInt(1, id);

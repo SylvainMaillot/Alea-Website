@@ -14,6 +14,7 @@ import org.hsqldb.cmdline.SqlToolError;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -74,7 +75,7 @@ public class TestJeuObject {
     }
     
     @Test
-    public void testUpdateJeux() throws SQLException {
+    public void testUpdateJeu() throws SQLException {
         String nom = "abc"; 
         int nbjmi = 2;
         int nbjma = 4; 
@@ -83,5 +84,29 @@ public class TestJeuObject {
         int id = 1;
         assertTrue(myDAO.updateJeu(nom, nbjmi, nbjma, desc, idp,id));
     }
-    //T0D0
+    
+    @Test
+    public void testAddJeu() throws SQLException {
+        String nom = "abc"; 
+        int nbjmi = 2;
+        int nbjma = 4; 
+        String desc = "Lord";
+        int idp = 2;
+        assertTrue(myDAO.addJeu(nom, nbjmi, nbjma, desc, idp));
+    }
+    
+    @Test
+    public void testRmJeu() throws SQLException {
+        assertTrue(myDAO.rmJeu(2));
+    }
+    
+    @Test
+    public void testListAllJeu() throws SQLException {
+        assertEquals(1,myDAO.listJeu().size());
+    }
+    
+    @Test
+    public void testListJeuUtilisateur() throws SQLException {
+        assertEquals(0,myDAO.listJeuUtilisateur(2).size());
+    }
 }

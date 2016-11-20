@@ -57,4 +57,7 @@ INSERT INTO Jeu VALUES('1','Les contrées de lhorreur','1','6','Blabla','3');
 /*Table Soiree*/
 INSERT INTO Soiree VALUES('1','2016-10-31','Alea horror party','0','0','');
 
+/*Table Programme*/
+INSERT INTO Programme VALUES('1','1');
+
 COMMIT;

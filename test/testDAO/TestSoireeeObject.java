@@ -90,12 +90,14 @@ public class TestSoireeeObject {
     
     @Test
     public void testAddSoiree() throws SQLException {
+        int nb = myDAO.listSoiree().size();
         Date j = new Date(2016-07-20);
         String nom = "Soiree 2"; 
         int nbj = 5;
         int nba = 8; 
         String desc = "HAHOHAHA";
         assertTrue(myDAO.addSoiree(j, nom, nbj, nba, desc));
+        assertEquals(nb+1, myDAO.listSoiree().size());
     }
     
     @Test

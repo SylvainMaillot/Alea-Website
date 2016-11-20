@@ -68,7 +68,7 @@ public class TestUtilisateurObject {
     @Test
     public void testCountPlayers() throws SQLException {
         int nb = myDAO.nbUtilisateurs();
-        assertEquals(5, nb);
+        assertEquals(11, nb);
     }
     
     @Test

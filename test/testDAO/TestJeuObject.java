@@ -67,7 +67,7 @@ public class TestJeuObject {
     @Test
     public void testCountJeu() throws SQLException {
         int nb = myDAO.nbJeux();
-        assertEquals(1, nb);
+        assertEquals(9, nb);
     }
     
     @Test
@@ -98,11 +98,11 @@ public class TestJeuObject {
     
     @Test
     public void testListAllJeu() throws SQLException {
-        assertEquals(1,myDAO.listJeu().size());
+        assertEquals(9,myDAO.listJeu().size());
     }
     
     @Test
     public void testListJeuUtilisateur() throws SQLException {
-        assertEquals(0,myDAO.listJeuUtilisateur(2).size());
+        assertEquals(4,myDAO.listJeuUtilisateur(2).size());
     }
 }

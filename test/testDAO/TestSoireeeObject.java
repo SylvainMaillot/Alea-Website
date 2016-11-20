@@ -1,9 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package testDAO;
 
 import dataAccessObject.AccessJeuObject;
+import dataAccessObject.AccessSoireeObject;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import javax.sql.DataSource;
 import org.hsqldb.cmdline.SqlFile;
@@ -20,12 +27,12 @@ import org.junit.Test;
  *
  * @author neiko
  */
-public class TestJeuObject {
+public class TestSoireeeObject {
     
     private static DataSource myDataSource; // La source de données à utiliser
     private static Connection myConnection ;
     
-    private AccessJeuObject myDAO;
+    private AccessSoireeObject myDAO;
     
     public static DataSource getDataSource() throws SQLException {
 	org.hsqldb.jdbc.JDBCDataSource ds = new org.hsqldb.jdbc.JDBCDataSource();
@@ -56,7 +63,7 @@ public class TestJeuObject {
     
     @Before
     public void setUp() {
-        myDAO = new AccessJeuObject(myDataSource);
+        myDAO = new AccessSoireeObject(myDataSource);
     }
     
     @After
@@ -65,44 +72,41 @@ public class TestJeuObject {
     }
 
     @Test
-    public void testCountJeu() throws SQLException {
-        int nb = myDAO.nbJeux();
-        assertEquals(1, nb);
+    public void testCountSoiree() throws SQLException {
+        int nb = myDAO.listSoiree().size();
+        assertEquals(2, nb);
     }
     
     @Test
-    public void testUpdateJeu() throws SQLException {
-        String nom = "abc"; 
-        int nbjmi = 2;
-        int nbjma = 4; 
-        String desc = "Lord";
-        int idp = 1;
+    public void testUpdateSoiree() throws SQLException {
+        Date j = new Date(2016-07-19);
+        String nom = "Soiree 1"; 
+        int nbj = 5;
+        int nba = 8; 
+        String desc = "HAHAHA";
         int id = 1;
-        assertTrue(myDAO.updateJeu(nom, nbjmi, nbjma, desc, idp,id));
+        assertTrue(myDAO.updateSoiree(j,nom, nbj, nba, desc,id));
     }
     
     @Test
-    public void testAddJeu() throws SQLException {
-        String nom = "abc"; 
-        int nbjmi = 2;
-        int nbjma = 4; 
-        String desc = "Lord";
-        int idp = 2;
-        assertTrue(myDAO.addJeu(nom, nbjmi, nbjma, desc, idp));
+    public void testAddSoiree() throws SQLException {
+        Date j = new Date(2016-07-20);
+        String nom = "Soiree 2"; 
+        int nbj = 5;
+        int nba = 8; 
+        String desc = "HAHOHAHA";
+        assertTrue(myDAO.addSoiree(j, nom, nbj, nba, desc));
     }
     
     @Test
-    public void testRmJeu() throws SQLException {
-        assertTrue(myDAO.rmJeu(2));
+    public void testRmSoiree() throws SQLException {
+        assertTrue(myDAO.rmSoiree(2));
     }
     
     @Test
-    public void testListAllJeu() throws SQLException {
-        assertEquals(1,myDAO.listJeu().size());
+    public void testListJeu() throws SQLException {
+        assertEquals(1,myDAO.listSoiree().size());
     }
     
-    @Test
-    public void testListJeuUtilisateur() throws SQLException {
-        assertEquals(0,myDAO.listJeuUtilisateur(2).size());
-    }
 }
+

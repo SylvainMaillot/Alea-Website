@@ -22,6 +22,8 @@ import javax.sql.DataSource;
  */
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
+    
+        private UtilisateurEntity user;
 
 	public DataSource getDataSource() throws SQLException {
 		com.mysql.jdbc.jdbc2.optional.MysqlDataSource ds = new MysqlConnectionPoolDataSource();
@@ -62,14 +64,15 @@ public class LoginController extends HttpServlet {
 		// Est-ce que l'utilisateur est connecté ?
 		// On cherche l'attribut customer dans la session
 		Object User = findUserInSession(request);
-		String jspView;
+		String jspView = null;
 		if (null == User) { // L'utilisateur n'est pas connecté
 			// On choisit la page de login
 			jspView = "logginForm.jsp";
 
 		} else { // L'utilisateur est connecté
 			// On choisit la page d'affichage
-			jspView = "playerInfos.jsp";
+                        request.setAttribute("user", user);
+			request.getRequestDispatcher("/UserInterface").include(request, response);
 		}
 		// On va vers la page choisie
 		request.getRequestDispatcher(jspView).forward(request, response);
@@ -121,7 +124,7 @@ public class LoginController extends HttpServlet {
 
 		try {
 			AccessUtilisateurObject dao = new AccessUtilisateurObject(getDataSource());
-			UtilisateurEntity user = dao.getUtilisateurByLoggin(login, password);
+			user = dao.getUtilisateurByLoggin(login, password);
 			if (user != null) { // On a trouvé la combinaison login / password
 				// On stocke l'utilisateur dans la session
 				HttpSession session = request.getSession(true); // démarre la session

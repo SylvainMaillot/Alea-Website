@@ -13,5 +13,9 @@
     </head>
     <body>
         <p>Bonjour ${prenom} ${nom} vous avez donné ${contrib} € à Alea :) </p>
+        <form method="POST">
+            <input type='submit' name='action' value='logout'>
+            <input type='submit' name='action' value='updateInfo'>
+        </form>
     </body>
 </html>

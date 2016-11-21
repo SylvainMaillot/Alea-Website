@@ -98,7 +98,7 @@ public class AccessUtilisateurObject {
                String mail, float contrib, int type, int id) throws SQLException {
 		String sql = "update Utilisateur set Nom = ?, Prenom = ?,"
                         + "MotDePasse = ?, Email = ?, Contribution = ?,"
-                        + "TypeUtilisateur = ? where ID = ?;";
+                        + "TypeUtilisateur = ? where ID = ?";
 		// Ouvrir une connexion
 		Connection connection = myDataSource.getConnection();
 		// On crée un statement pour exécuter une requête

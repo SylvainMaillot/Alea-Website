@@ -37,7 +37,7 @@ public class UserInterface extends HttpServlet {
         
         if (action != null && action.equals("updateInfo")) {
             request.setAttribute("user", user);
-            request.getRequestDispatcher("/UpdateInfos").forward(request, response);
+            request.getRequestDispatcher("/UpdateInfos").include(request, response);
         }
                 
         String jspView = "playerInfos.jsp";

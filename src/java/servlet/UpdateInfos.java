@@ -54,11 +54,6 @@ public class UpdateInfos extends HttpServlet {
         user = (UtilisateurEntity) request.getAttribute("user");
         request.getSession(true);
         
-        String action = request.getParameter("action3");
-        if (action != null && action.equals("update")) {
-            doUpdate(request);
-            request.getRequestDispatcher("/UserInterface").include(request, response);
-        }
         
         String jspView = "updateInfos.jsp";
         request.setAttribute("prenom", user.getPrenom());
@@ -67,23 +62,6 @@ public class UpdateInfos extends HttpServlet {
         request.setAttribute("mail", user.getEmail());
         request.getRequestDispatcher(jspView).forward(request, response);
         
-    }
-    
-    private void doUpdate(HttpServletRequest request) {
-        String nom = request.getParameter("nom");
-        String prenom = request.getParameter("prenom");
-        String passwd = request.getParameter("passwd");
-        String mail = request.getParameter("mail");
-        
-        try {
-            AccessUtilisateurObject dao = new AccessUtilisateurObject(getDataSource());
-            dao.updateUtilisateur(nom, prenom, passwd, mail, user.getContribution(),
-                    user.getTypeUtilisateur(), user.getUserId());
-            user = dao.getUtilisateurByLoggin(user.getIdentifiant(), passwd);
-            request.setAttribute("user", user);
-        } catch (SQLException ex) {
-            Logger.getLogger("UpdateInfos").log(Level.SEVERE, "SQL Exception", ex);
-	}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

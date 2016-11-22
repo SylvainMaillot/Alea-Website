@@ -58,6 +58,9 @@ public class LoginController extends HttpServlet {
 				case "logout":
 					doLogout(request);
 					break;
+                                case "update":
+                                        doUpdate(request);
+                                        break;
 			}
 		}
 
@@ -143,6 +146,23 @@ public class LoginController extends HttpServlet {
 		// On termine la session
 		request.getSession(false).invalidate();
 	}
+        
+        private void doUpdate(HttpServletRequest request) {
+        String nom = request.getParameter("nom");
+        String prenom = request.getParameter("prenom");
+        String passwd = request.getParameter("passwd");
+        String mail = request.getParameter("mail");
+        
+        try {
+            AccessUtilisateurObject dao = new AccessUtilisateurObject(getDataSource());
+            dao.updateUtilisateur(nom, prenom, passwd, mail, user.getContribution(),
+                    user.getTypeUtilisateur(), user.getUserId());
+            user = dao.getUtilisateurByLoggin(user.getIdentifiant(), passwd);
+            request.setAttribute("user", user);
+        } catch (SQLException ex) {
+            Logger.getLogger("UpdateInfos").log(Level.SEVERE, "SQL Exception", ex);
+	}
+    }
 	
 	private Object findUserInSession(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);

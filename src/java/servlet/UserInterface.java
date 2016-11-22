@@ -31,14 +31,7 @@ public class UserInterface extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UtilisateurEntity user = (UtilisateurEntity) request.getAttribute("user");
-        request.getSession(true);
-        
-        String action = request.getParameter("action");
-        
-        if (action != null && action.equals("updateInfo")) {
-            request.setAttribute("user", user);
-            request.getRequestDispatcher("/UpdateInfos").include(request, response);
-        }
+        request.getSession(true);        
                 
         String jspView = "playerInfos.jsp";
         request.setAttribute("prenom", user.getPrenom());

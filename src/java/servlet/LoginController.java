@@ -61,6 +61,11 @@ public class LoginController extends HttpServlet {
                                 case "update":
                                         doUpdate(request);
                                         break;
+                                case "updateInfo":
+                                        request.setAttribute("user", user);
+                                        request.getRequestDispatcher("/UpdateInfos").include(request, response);
+                                case "liste des joueurs":
+                                        request.getRequestDispatcher("/ListPlayer").include(request, response);
 			}
 		}
 

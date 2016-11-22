@@ -17,7 +17,7 @@
             <input type='submit' name='action' value='logout'>
             <input type='submit' name='action' value='updateInfo'>
             <c:if test="${type == 3}"> 
-                <input type='submit' name='action' value='listJoueur'> 
+                <input type='submit' name='action' value='liste des joueurs'> 
             </c:if>
         </form>
     </body>

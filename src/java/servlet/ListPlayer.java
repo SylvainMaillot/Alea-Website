@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlet;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
@@ -11,20 +6,33 @@ import dataAccessObject.UtilisateurEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
  *
  * @author neiko
  */
-public class UpdateInfos extends HttpServlet {
+@WebServlet(name = "ListPlayer", urlPatterns = {"/ListPlayer"})
+public class ListPlayer extends HttpServlet {
+        public DataSource getDataSource() throws SQLException {
+		com.mysql.jdbc.jdbc2.optional.MysqlDataSource ds = new MysqlConnectionPoolDataSource();
+                ds.setDatabaseName("Alea");
+		ds.setUser("root");
+		ds.setPassword("root");
+		// The host on which Network Server is running
+		ds.setServerName("localhost");
+		// port on which Network Server is listening
+		ds.setPortNumber(3306);
+		return ds;
+	}
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,17 +45,14 @@ public class UpdateInfos extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UtilisateurEntity user = (UtilisateurEntity) request.getAttribute("user");
-        request.getSession(true);
-        
-        
-        String jspView = "updateInfos.jsp";
-        request.setAttribute("prenom", user.getPrenom());
-        request.setAttribute("nom", user.getNom());
-        request.setAttribute("passwd", user.getMotDePasse());
-        request.setAttribute("mail", user.getEmail());
-        request.getRequestDispatcher(jspView).forward(request, response);
-        
+            try {
+                AccessUtilisateurObject dao = new AccessUtilisateurObject(getDataSource());
+                ArrayList<UtilisateurEntity> ue = dao.listUtilisateur();
+                request.setAttribute("ue", ue);
+                request.getRequestDispatcher("listPlayer.jsp").forward(request, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(ListPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

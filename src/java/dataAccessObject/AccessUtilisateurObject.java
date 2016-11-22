@@ -94,6 +94,38 @@ public class AccessUtilisateurObject {
 		return result;
 	}
         
+        public UtilisateurEntity getUtilisateurByID(int ID) throws SQLException {
+       		UtilisateurEntity result = null;
+		String sql = "select * from Utilisateur\n" +
+                "where ID= ?";
+		// Ouvrir une connexion
+		Connection connection = myDataSource.getConnection();
+		// On crée un statement pour exécuter une requête
+		PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, ID);
+		// Un ResultSet pour parcourir les enregistrements du résultat
+		ResultSet rs = stmt.executeQuery();
+		if (rs.next()) {
+                        int UserId = rs.getInt("ID");
+                        String Identifiant = rs.getString("Identifiant");
+                        String MotDePasse = rs.getString("MotDePasse"); 
+                        String Email = rs.getString("Email");
+                        String Nom = rs.getString("Nom");
+                        String Prenom = rs.getString("Prenom");
+                        float Contribution = rs.getFloat("Contribution");
+                        int TypeUtilisateur = rs.getInt("TypeUtilisateur");
+                        double contribution = rs.getDouble("Contribution");
+                        result = new UtilisateurEntity(UserId, Identifiant, MotDePasse,
+                                Email, Prenom, Nom, Contribution, TypeUtilisateur);
+		}
+		// On ferme tout
+		rs.close();
+		stmt.close();
+		connection.close();
+
+		return result;
+	} 
+        
        public boolean updateUtilisateur(String nom, String prenom, String psswd,
                String mail, float contrib, int type, int id) throws SQLException {
 		String sql = "update Utilisateur set Nom = ?, Prenom = ?,"

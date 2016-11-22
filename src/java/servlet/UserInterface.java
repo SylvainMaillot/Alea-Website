@@ -44,6 +44,7 @@ public class UserInterface extends HttpServlet {
         request.setAttribute("prenom", user.getPrenom());
         request.setAttribute("nom", user.getNom());
         request.setAttribute("contrib", user.getContribution());
+        request.setAttribute("type", user.getTypeUtilisateur());
         request.getRequestDispatcher(jspView).forward(request, response);
     }
 

@@ -15,12 +15,13 @@
         <p>Bonjour ${prenom} ${nom} vous avez donné ${contrib} € à Alea :) </p>
         <form action="${pageContext.request.contextPath}/UpdateInfos" method="POST">
             <input type='submit' name='id' value=${user.userId}>
-            <c:if test="${type == 3}"> 
+        </form>
+            <form method="POST"> 
+                <input type='submit' name='action' value='logout'>
+                <c:if test="${type == 3}"> 
                 <input type='submit' name='action' value='liste des joueurs'> 
             </c:if>
-                <a href="/Alea-Website/UpdateInfos">update infos</a>
-        </form>
-            <form method="POST"> <input type='submit' name='action' value='logout'></form>
+            </form>
             
     </body>
 </html>

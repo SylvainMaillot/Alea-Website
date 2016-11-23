@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,21 @@ import javax.sql.DataSource;
  *
  * @author neiko
  */
+@WebServlet(name = "UpdateInfos", urlPatterns = {"/UpdateInfos"})
 public class UpdateInfos extends HttpServlet {
+    UtilisateurEntity user;
+    
+    public DataSource getDataSource() throws SQLException {
+		com.mysql.jdbc.jdbc2.optional.MysqlDataSource ds = new MysqlConnectionPoolDataSource();
+                ds.setDatabaseName("Alea");
+		ds.setUser("root");
+		ds.setPassword("root");
+		// The host on which Network Server is running
+		ds.setServerName("localhost");
+		// port on which Network Server is listening
+		ds.setPortNumber(3306);
+		return ds;
+	}
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,17 +52,9 @@ public class UpdateInfos extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UtilisateurEntity user = (UtilisateurEntity) request.getAttribute("user");
         request.getSession(true);
-        
-        
         String jspView = "updateInfos.jsp";
-        request.setAttribute("prenom", user.getPrenom());
-        request.setAttribute("nom", user.getNom());
-        request.setAttribute("passwd", user.getMotDePasse());
-        request.setAttribute("mail", user.getEmail());
         request.getRequestDispatcher(jspView).forward(request, response);
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -76,7 +83,18 @@ public class UpdateInfos extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+                AccessUtilisateurObject dao = new AccessUtilisateurObject(getDataSource());
+                    int id = Integer.parseInt(request.getParameter("id"));
+                    user = dao.getUtilisateurByID(id);
+                    request.setAttribute("prenom", user.getPrenom());
+                    request.setAttribute("nom", user.getNom());
+                    request.setAttribute("passwd", user.getMotDePasse());
+                    request.setAttribute("mail", user.getEmail());
+                    processRequest(request, response);
+		} catch (SQLException ex) {
+			Logger.getLogger("loginMVC").log(Level.SEVERE, "SQL Exception", ex);
+		}
     }
 
     /**

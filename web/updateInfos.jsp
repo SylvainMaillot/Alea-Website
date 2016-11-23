@@ -13,7 +13,7 @@
     </head>
     <body>
         <p>Selectionnez les champs à modifier</p>
-        <form method="POST">
+        <form action="${pageContext.request.contextPath}/LoginController" method="POST">
             <label>Prenom : </label><input type="text" name="prenom" value=${prenom} /> <br>
             <label>Nom : </label><input type="text" name="nom" value=${nom} /> <br>
             <label>Mot de passe : </label><input type="password" name="passwd" value=${passwd} /> <br>

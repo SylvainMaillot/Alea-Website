@@ -151,6 +151,11 @@ public class LoginController extends HttpServlet {
 		// On termine la session
 		request.getSession(false).invalidate();
 	}
+	
+	private Object findUserInSession(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		return (session == null) ? null : session.getAttribute("user");
+	}
         
         private void doUpdate(HttpServletRequest request) {
         String nom = request.getParameter("nom");
@@ -168,10 +173,5 @@ public class LoginController extends HttpServlet {
             Logger.getLogger("UpdateInfos").log(Level.SEVERE, "SQL Exception", ex);
 	}
     }
-	
-	private Object findUserInSession(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		return (session == null) ? null : session.getAttribute("user");
-	}
 
 }

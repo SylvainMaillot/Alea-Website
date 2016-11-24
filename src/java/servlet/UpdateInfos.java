@@ -87,10 +87,7 @@ public class UpdateInfos extends HttpServlet {
                 AccessUtilisateurObject dao = new AccessUtilisateurObject(getDataSource());
                     int id = Integer.parseInt(request.getParameter("id"));
                     user = dao.getUtilisateurByID(id);
-                    request.setAttribute("prenom", user.getPrenom());
-                    request.setAttribute("nom", user.getNom());
-                    request.setAttribute("passwd", user.getMotDePasse());
-                    request.setAttribute("mail", user.getEmail());
+                    request.setAttribute("user", user);
                     processRequest(request, response);
 		} catch (SQLException ex) {
 			Logger.getLogger("loginMVC").log(Level.SEVERE, "SQL Exception", ex);

@@ -15,6 +15,7 @@
         <p>Bonjour ${prenom} ${nom} vous avez donné ${contrib} € à Alea :) </p>
         <form action="${pageContext.request.contextPath}/UpdateInfos" method="POST">
             <input type='submit' name='id' value=${user.userId}>
+            <input type='submit' name='id' value='liste des jeux'>
         </form>
             <form method="POST"> 
                 <input type='submit' name='action' value='logout'>

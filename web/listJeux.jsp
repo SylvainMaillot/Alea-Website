@@ -13,21 +13,23 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="${pageContext.request.contextPath}/UpdateInfos" method="POST">
-            <c:forEach var="ue" varStatus="status" items="${ue}">
+        <form>
+            <c:forEach var="jeu" varStatus="status" items="${jeu}">
                 <c:if test="${status.first}">
                 <%-- On met l'en-tête de la table --%>
                     <table border='1'>
-                        <tr><th>ID</th><th>Identifiant</th><th>Email</th><th>Prenom</th>
-                            <th>Nom</th><th>Contribution</th><th>Type Utilisateur</th>
-                            <th>Modifider</th>
+                        <tr><th>ID</th><th>Nom</th><th>Nombre de joueurs min</th><th>Nombre de joueurs max</th>
+                            <th>proprietaire du jeu</th>
                         </tr>
                 </c:if>
                         <%-- On met une ligne dans la table --%>
                         <%-- Les noms de propriétés correspondent aux "propriétés" java exportées par CustomerEntity (ex: getName() ) --%>
-                        <tr><td>${ue.userId}</td><td>${ue.identifiant}</td><td>${ue.email}</td>
-                            <td>${ue.prenom}</td><td>${ue.nom}</td><td>${ue.contribution}</td><td>${ue.typeUtilisateur}</td>
-                            <td><input type='submit' name='id' value="changer" onclic="${ue.userId}"> </td>
+                        <tr><td>${jeu.gameId}</td>
+                            <td>${jeu.nom}</td>
+                            <td>${jeu.nbJoueurMin}</td>
+                            <td>${jeu.nbJoueurMax}</td>
+                            <td>${jeu.proprietaireID}</td>  
+                            
                         </tr>
                             <c:if test="${status.last}"> <!-- Si on est sur le dernier élément de la liste -->
                             <%-- On ferme la table --%>

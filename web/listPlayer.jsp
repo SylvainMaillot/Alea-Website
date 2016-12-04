@@ -5,35 +5,48 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Visualisation Google</title>
+	<!-- On charge JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- On charge l'API Google -->
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript" 	src="javascript/jquery.jsontotable.min.js"></script>
+	<script>
+		// Après le chargement de la page, on fait l'appel AJAX
+            $(document).ready(	
+                function () {
+                    doAjax();
+                }
+            );
+                
+                function doAjax() {
+			$.ajax({
+				url: "listJoueurs",
+				dataType: "json",
+				success: // La fonction qui traite les résultats
+					function (result) {
+						$("#joueurs").empty();
+                                                // On convertit les enregistrements en table HTML
+						$.jsontotable(result, {id: "#joueurs"});
+					},
+				error: showError
+			});
+		}
+		
+		// Fonction qui traite les erreurs de la requête
+		function showError(xhr, status, message) {
+			alert("Erreur: " + status + " : " + message);
+		}
+
+	</script>         
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="${pageContext.request.contextPath}/UpdateInfos" method="POST">
-            <c:forEach var="ue" varStatus="status" items="${ue}">
-                <c:if test="${status.first}">
-                <%-- On met l'en-tête de la table --%>
-                    <table border='1'>
-                        <tr><th>ID</th><th>Identifiant</th><th>Email</th><th>Prenom</th>
-                            <th>Nom</th><th>Contribution</th><th>Type Utilisateur</th>
-                            <th>Modifider</th>
-                        </tr>
-                </c:if>
-                        <%-- On met une ligne dans la table --%>
-                        <%-- Les noms de propriétés correspondent aux "propriétés" java exportées par CustomerEntity (ex: getName() ) --%>
-                        <tr><td>${ue.userId}</td><td>${ue.identifiant}</td><td>${ue.email}</td>
-                            <td>${ue.prenom}</td><td>${ue.nom}</td><td>${ue.contribution}</td><td>${ue.typeUtilisateur}</td>
-                            <td><input type='submit' name='id' value="changer" onclic="${ue.userId}"> </td>
-                        </tr>
-                            <c:if test="${status.last}"> <!-- Si on est sur le dernier élément de la liste -->
-                            <%-- On ferme la table --%>
-                                </table>
-                        </c:if>
-            </c:forEach>
-        </form>
+        <h1>Liste des joueurs</h1>
+	<!-- Le graphique apparaît ici -->
+	<div id="joueurs"></div>
     </body>
 </html>

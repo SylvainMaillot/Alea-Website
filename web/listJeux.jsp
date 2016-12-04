@@ -22,8 +22,6 @@
                             <th>proprietaire du jeu</th>
                         </tr>
                 </c:if>
-                        <%-- On met une ligne dans la table --%>
-                        <%-- Les noms de propriétés correspondent aux "propriétés" java exportées par CustomerEntity (ex: getName() ) --%>
                         <tr><td>${jeu.gameId}</td>
                             <td>${jeu.nom}</td>
                             <td>${jeu.nbJoueurMin}</td>
@@ -31,9 +29,8 @@
                             <td>${jeu.proprietaireID}</td>  
                             
                         </tr>
-                            <c:if test="${status.last}"> <!-- Si on est sur le dernier élément de la liste -->
-                            <%-- On ferme la table --%>
-                                </table>
+                            <c:if test="${status.last}">
+                            </table>
                         </c:if>
             </c:forEach>
         </form>

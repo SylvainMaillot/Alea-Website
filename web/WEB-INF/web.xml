@@ -8,6 +8,10 @@
         <servlet-name>UserInterface</servlet-name>
         <servlet-class>servlet.UserInterface</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListJoueur</servlet-name>
+        <servlet-class>servlet.ListJoueurs</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UpdateInfos</servlet-name>
         <url-pattern>/UpdateInfos</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>UserInterface</servlet-name>
         <url-pattern>/UserInterface</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListJoueur</servlet-name>
+        <url-pattern>/ListJoueur</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -7,7 +7,6 @@ package servlet;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
 import dataAccessObject.AccessUtilisateurObject;
-import dataAccessObject.UtilisateurEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -18,16 +17,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+import com.google.gson.*;
 
 /**
  *
  * @author neiko
  */
-@WebServlet(name = "UpdateInfos", urlPatterns = {"/UpdateInfos"})
-public class UpdateInfos extends HttpServlet {
-    UtilisateurEntity user;
+@WebServlet(name = "listJoueurs", urlPatterns = {"/listJoueurs"})
+public class ListJoueurs extends HttpServlet {
     
     public DataSource getDataSource() throws SQLException {
 		com.mysql.jdbc.jdbc2.optional.MysqlDataSource ds = new MysqlConnectionPoolDataSource();
@@ -52,11 +50,17 @@ public class UpdateInfos extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession(true);
-        String jspView = "updateInfos.jsp";
-        user = (UtilisateurEntity) request.getAttribute("user");
-        request.setAttribute("user", user);
-        request.getRequestDispatcher(jspView).forward(request, response);
+        response.setContentType("application/json;charset=UTF-8");
+        
+        try (PrintWriter out = response.getWriter()) {
+           
+            AccessUtilisateurObject dao = new AccessUtilisateurObject(getDataSource());
+            Gson gson = new Gson();
+            String gsonData = gson.toJson(dao.listUtilisateur());
+            out.println(gsonData);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListJoueurs.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

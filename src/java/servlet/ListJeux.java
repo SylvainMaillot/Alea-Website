@@ -49,7 +49,8 @@ public class ListJeux extends HttpServlet {
             throws ServletException, IOException {
             try {
                 AccessJeuObject dao = new AccessJeuObject(getDataSource());
-                ArrayList<JeuEntity> jeu = dao.listJeuUtilisateur(3);
+                int id = (int) request.getAttribute("id");
+                ArrayList<JeuEntity> jeu = dao.listJeuUtilisateur(id);
                 request.setAttribute("jeu", jeu);
                 request.getRequestDispatcher("listJeux.jsp").forward(request, response);
             } catch (SQLException ex) {

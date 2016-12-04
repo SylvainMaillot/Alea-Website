@@ -14,12 +14,8 @@
 	<body>
 		<h1>Bienvenue sur le site web d'Alea</h1>
 		Merci de vous identifier:<br>
-                <%--
-                La servlet fait : request.setAttribute("errorMessage", "Login/Password incorrect");
-                La JSP récupère cette valeur dans ${errorMessage}
-                --%>
 		<div style="color:red">${errorMessage}</div>
-                <form method="POST"> <!-- l'action par défaut est l'URL courant, qui va rappeler la servlet -->
+                <form action="${pageContext.request.contextPath}/LoginController" method="POST">
 			Pseudonyme : <input name='id'><br>
 			Mot de Passe : <input name='pass' type='password'><br>
 			<input type='submit' name='action' value='login'>

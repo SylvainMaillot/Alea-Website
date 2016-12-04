@@ -1,6 +1,7 @@
 package servlet;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
+import dataAccessObject.AccessJeuObject;
 import dataAccessObject.AccessUtilisateurObject;
 import dataAccessObject.UtilisateurEntity;
 import java.io.IOException;
@@ -64,10 +65,17 @@ public class LoginController extends HttpServlet {
                                 case "updateInfo":
                                         request.setAttribute("user", user);
                                         request.getRequestDispatcher("/UpdateInfos").include(request, response);
+                                        break;
                                 case "liste des joueurs":
-                                        request.getRequestDispatcher("/ListPlayer").include(request, response);
-			}
+                                    request.getRequestDispatcher("listPlayer.jsp").forward(request, response);
+                                    break;
+                                case "liste des jeux":
+                                        request.setAttribute("id",user.getUserId());
+                                        request.getRequestDispatcher("/ListJeux").include(request, response);
+                                        break;
+                        }
 		}
+                
 
 		// Est-ce que l'utilisateur est connecté ?
 		// On cherche l'attribut customer dans la session

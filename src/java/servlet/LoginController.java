@@ -83,7 +83,7 @@ public class LoginController extends HttpServlet {
 		String jspView = null;
 		if (null == User) { // L'utilisateur n'est pas connecté
 			// On choisit la page de login
-			jspView = "logginForm.jsp";
+			jspView = "Accueil.jsp";
 
 		} else { // L'utilisateur est connecté
 			// On choisit la page d'affichage
@@ -170,11 +170,13 @@ public class LoginController extends HttpServlet {
         String prenom = request.getParameter("prenom");
         String passwd = request.getParameter("passwd");
         String mail = request.getParameter("mail");
+        float contrib = Float.parseFloat(request.getParameter("contrib"));
+        int typeUser = Integer.parseInt(request.getParameter("type"));
         
         try {
             AccessUtilisateurObject dao = new AccessUtilisateurObject(getDataSource());
-            dao.updateUtilisateur(nom, prenom, passwd, mail, user.getContribution(),
-                    user.getTypeUtilisateur(), user.getUserId());
+            dao.updateUtilisateur(nom, prenom, passwd, mail, contrib,
+                    typeUser, user.getUserId());
             user = dao.getUtilisateurByLoggin(user.getIdentifiant(), passwd);
             request.setAttribute("user", user);
         } catch (SQLException ex) {

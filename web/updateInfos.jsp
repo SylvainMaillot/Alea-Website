@@ -18,10 +18,8 @@
             <label>Nom : </label><input type="text" name="nom" value=${user.nom} /> <br>
             <label>Mot de passe : </label><input type="password" name="passwd" value=${user.motDePasse} /> <br>
             <label>Email : </label><input type="text" name="mail" value=${user.email} /> <br>
-            <c:if test="${type == 3}"> 
-                <label>Contribution : </label><input type="text" name="mail" value=${user.contribution} /> <br>
-                <label>Type d'utilisateur : </label><input type="text" name="mail" value=${user.typeUtilisateur} /> <br>
-            </c:if>
+            <label>Contribution : </label><input type="text" name="contrib" value=${user.contribution} /> <br>
+            <label>Type d'utilisateur : </label><input type="text" name="type" value=${user.typeUtilisateur} /> <br>
             <input type='submit' name='action' value='update'>
         </form>
     </body>

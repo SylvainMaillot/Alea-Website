@@ -72,9 +72,7 @@ public class AccessJeuObject {
     
     public boolean updateJeu(String nom, int njmi, int njma,
                String desc, int prop, int id) throws SQLException {
-		String sql = "update Jeu set Nom = ?, NbJoueurMin = ?,"
-                        + "NbJoueurMax = ?, Description = ?, Proprietaire = ?"
-                        + "where ID = ?;";
+		String sql = "update Jeu set Nom = ?, NbJoueurMin = ?,NbJoueurMax = ?, Description = ?, Proprietaire = ? where ID = ?";
 		// Ouvrir une connexion
 		Connection connection = myDataSource.getConnection();
 		// On crée un statement pour exécuter une requête
@@ -97,9 +95,7 @@ public class AccessJeuObject {
     public boolean addJeu(String nom, int njmi, int njma,
                String desc, int prop) throws SQLException {
                
-		String sql = "INSERT INTO Jeu(Nom,NbJoueurMin,NbJoueurMax,"
-                        + "Description,Proprietaire) VALUES (?,?,"
-                        + "?,?,?)";
+		String sql = "INSERT INTO Jeu(Nom,NbJoueurMin,NbJoueurMax,Description,Proprietaire) VALUES (?,?,?,?,?)";
                     // Ouvrir une connexion
                     Connection connection = myDataSource.getConnection();
                     // On crée un statement pour exécuter une requête

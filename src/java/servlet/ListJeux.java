@@ -35,7 +35,7 @@ public class ListJeux extends HttpServlet {
 		ds.setPortNumber(3306);
 		return ds;
 	}
-
+        
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,6 +52,7 @@ public class ListJeux extends HttpServlet {
                 int id = (int) request.getAttribute("id");
                 ArrayList<JeuEntity> jeu = dao.listJeuUtilisateur(id);
                 request.setAttribute("jeu", jeu);
+                
                 request.getRequestDispatcher("listJeux.jsp").forward(request, response);
             } catch (SQLException ex) {
                 Logger.getLogger(ListJeux.class.getName()).log(Level.SEVERE, null, ex);

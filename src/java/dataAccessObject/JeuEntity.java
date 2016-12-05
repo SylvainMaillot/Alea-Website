@@ -28,7 +28,7 @@ public class JeuEntity {
     }
 
     public String getNom() {
-        return Nom;
+        return Nom; 
     }
 
     public int getNbJoueurMin() {

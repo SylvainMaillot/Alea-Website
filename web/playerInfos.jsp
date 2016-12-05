@@ -17,7 +17,9 @@
             <input type='submit' name='action' value="updateInfo">
             <input type='submit' name='action' value='liste des jeux'>
             <input type='submit' name='action' value='logout'>
-            <input type='submit' name='action' value='liste des joueurs'> 
+        </form>
+        <form method="link" action="listPlayer.jsp">
+        <input type="submit" value="liste des joueurs">
         </form>
             
     </body>

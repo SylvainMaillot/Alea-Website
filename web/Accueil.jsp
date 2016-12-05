@@ -15,5 +15,9 @@
     <body>
         <h1>Bienvenue sur le site d'Alea</h1>
         <%@ include file="logginForm.jsp" %>
+        <h2>Pas encore inscrit ?</h2>
+        <form method="link" action="inscription.jsp">
+            <input type="submit" value="s'inscrire">
+        </form>
     </body>
 </html>

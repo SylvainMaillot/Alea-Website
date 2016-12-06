@@ -21,6 +21,6 @@
         <form method="link" action="listPlayer.jsp">
         <input type="submit" value="liste des joueurs">
         </form>
-            
+        <%@ include file="jeuxJoueursGraph.jsp" %>
     </body>
 </html>

@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
@@ -220,4 +222,23 @@ public class AccessUtilisateurObject {
            connection.close();
            return result;
        }
+       
+       public Map<String, Integer> gameByUser() throws SQLException {
+		Map<String, Integer> result = new HashMap<>();
+		String sql = "SELECT Identifiant,count(jeu.id) AS total FROM utilisateur\n" +
+                                "LEFT JOIN jeu ON (jeu.`Proprietaire`=utilisateur.`ID`)\n" +
+                                "GROUP BY `Identifiant`;";
+		try (Connection connection = myDataSource.getConnection(); 
+		     Statement stmt = connection.createStatement(); 
+		     ResultSet rs = stmt.executeQuery(sql)) {
+			while (rs.next()) {
+				// On récupère les champs nécessaires de l'enregistrement courant
+				String name = rs.getString("Identifiant");
+				int totalJeu = rs.getInt("total");
+				// On l'ajoute à la liste des résultats
+				result.put(name, totalJeu);
+			}
+		}
+		return result;
+	}
 }

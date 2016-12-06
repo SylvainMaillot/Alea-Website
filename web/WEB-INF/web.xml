@@ -12,6 +12,10 @@
         <servlet-name>ListJoueur</servlet-name>
         <servlet-class>servlet.ListJoueurs</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>jeuxParJoueur</servlet-name>
+        <servlet-class>servlet.jeuxParJoueur</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UpdateInfos</servlet-name>
         <url-pattern>/UpdateInfos</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>ListJoueur</servlet-name>
         <url-pattern>/ListJoueur</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>jeuxParJoueur</servlet-name>
+        <url-pattern>/jeuxParJoueur</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

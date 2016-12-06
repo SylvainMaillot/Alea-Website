@@ -16,6 +16,10 @@
         <servlet-name>jeuxParJoueur</servlet-name>
         <servlet-class>servlet.jeuxParJoueur</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>contribParJoueur</servlet-name>
+        <servlet-class>servlet.contribParJoueur</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UpdateInfos</servlet-name>
         <url-pattern>/UpdateInfos</url-pattern>
@@ -32,9 +36,14 @@
         <servlet-name>jeuxParJoueur</servlet-name>
         <url-pattern>/jeuxParJoueur</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>contribParJoueur</servlet-name>
+        <url-pattern>/contribParJoueur</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    
 </web-app>

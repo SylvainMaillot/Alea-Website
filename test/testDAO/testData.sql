@@ -47,26 +47,26 @@ ALTER TABLE Utilisateur ADD CONSTRAINT ContributionPositive CHECK (Contribution 
 
 /*Insertion dans les tables
 Table Utilisateur*/
-INSERT INTO Utilisateur VALUES(1,'Alea','Jacta_est','AleaJacta_est@gmail.com','Alea','Asso',0.0,3);
+INSERT INTO Utilisateur VALUES(1,'Alea','Jacta_est','AleaJacta_est@gmail.com','Alea','Asso',3.0,3);
 INSERT INTO Utilisateur VALUES(2,'Mamamillaaa','xxx','Mamamilla@gmail.com','Maxime','Moreno',25.0,3);
 INSERT INTO Utilisateur VALUES(3,'Neiko','Nyaa','sylvain.maillot1@gmail.com','Sylvain','Maillot',3.5,2);
-INSERT INTO Utilisateur VALUES(4,'NotoPD','AZERTY','hahacaca@gmail.com','Romain','Noto',0.0,1);
+INSERT INTO Utilisateur VALUES(4,'Nototo','AZERTY','hahacaca@gmail.com','Romain','Noto',2.0,1);
 INSERT INTO Utilisateur VALUES(5,'Flob','lapin','flobeur@gmail.com','Flo','Bru',0.0,1);
 INSERT INTO Utilisateur VALUES(6,'Skyary','xcom','AOE@gmail.com','Grec','Caillou',0.0,1);
 INSERT INTO Utilisateur VALUES(7,'Jesus','resurection','audelas@gmail.com','Jesus','Satan',0.0,1);
 INSERT INTO Utilisateur VALUES(8,'Ana','vousnemehackerezpas','ow@gmail.com','Bella','Ana',0.0,1);
-INSERT INTO Utilisateur VALUES(9,'Hanzo','ryugawagatekiwokurau','dragonstrike@gmail.com','Hanzo','Genji',0.0,1);
-INSERT INTO Utilisateur VALUES(10,'Mei','jesuisuncancertrololo','glaçon@gmail.com','Salope','Deglace',0.0,1);
+INSERT INTO Utilisateur VALUES(9,'Hanzo','ryugawagatekiwokurau','dragonstrike@gmail.com','Hanzo','Genji',7.0,1);
+INSERT INTO Utilisateur VALUES(10,'Mei','jesuisfolle','glaçon@gmail.com','Joséta','Deglace',0.0,1);
 
 /*Table Jeu*/
 INSERT INTO Jeu VALUES('1','Les contrées de l horreur','1','6','Blabla','3');
 INSERT INTO Jeu VALUES('2','Loup Garou','1','20','Trop bien','2');
-INSERT INTO Jeu VALUES('3','J aime bien ta mere','1','2','cest trop drole','4');
+INSERT INTO Jeu VALUES('3','J aime bien les chips','1','2','cest trop drole','4');
 INSERT INTO Jeu VALUES('4','Scrabble','1','6','C est plus drole que ce quon pourrait croire','2');
 INSERT INTO Jeu VALUES('5','Minecraft','1','6','J ai vraiment rien compris','5');
-INSERT INTO Jeu VALUES('6','Nazi the game','1','6','Mon jeu preferé','10');
-INSERT INTO Jeu VALUES('7','Dragonborn','5','8','KOLOZUUU','9');
-INSERT INTO Jeu VALUES('8','Nains dans la mine','2','8','Nains vs the world','2');
+INSERT INTO Jeu VALUES('6','Bazi the game','1','6','Mon jeu preferé','10');
+INSERT INTO Jeu VALUES('7','Dragonborn','5','8','LOK VA THOR','9');
+INSERT INTO Jeu VALUES('8','Nains dans la mine','2','8','Dwarfs vs the world','2');
 INSERT INTO Jeu VALUES('9','Dark tale','2','4','Meilleur jeu du monde','2');
 INSERT INTO Jeu VALUES('10','Time stories','1','4','Bon jeu en coop','2');
 

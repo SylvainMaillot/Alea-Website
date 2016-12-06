@@ -8,7 +8,6 @@ package servlet;
 import com.google.gson.Gson;
 import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
 import dataAccessObject.AccessUtilisateurObject;
-import dataAccessObject.UtilisateurEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -25,10 +24,11 @@ import javax.sql.DataSource;
  *
  * @author Hp
  */
-@WebServlet(name = "jeuxParjoueur", urlPatterns = {"/jeuxParjoueur"})
-public class jeuxParJoueur extends HttpServlet {
+@WebServlet(name = "contribParJoueur", urlPatterns = {"/contribParJoueur"})
+public class contribParJoueur extends HttpServlet {
+
     
-    public DataSource getDataSource() throws SQLException {
+        public DataSource getDataSource() throws SQLException {
 		com.mysql.jdbc.jdbc2.optional.MysqlDataSource ds = new MysqlConnectionPoolDataSource();
                 ds.setDatabaseName("Alea");
 		ds.setUser("root");
@@ -39,7 +39,7 @@ public class jeuxParJoueur extends HttpServlet {
 		ds.setPortNumber(3306);
 		return ds;
 	}
-
+        
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -57,7 +57,7 @@ public class jeuxParJoueur extends HttpServlet {
 			AccessUtilisateurObject dao = new AccessUtilisateurObject(getDataSource());
 			// Générer du JSON
 			Gson gson = new Gson();
-			String gsonData = gson.toJson(dao.gameByUser());
+			String gsonData = gson.toJson(dao.bestDonator());
 			out.println(gsonData);			
 		} catch (Exception ex) {
 			Logger.getLogger("JSONServlet").log(Level.SEVERE, "Action en erreur", ex);

@@ -241,4 +241,21 @@ public class AccessUtilisateurObject {
 		}
 		return result;
 	}
+       
+       public Map<String, Float> bestDonator() throws SQLException {
+		Map<String, Float> result = new HashMap<>();
+		String sql = "SELECT Identifiant,Contribution FROM utilisateur;";
+		try (Connection connection = myDataSource.getConnection(); 
+		     Statement stmt = connection.createStatement(); 
+		     ResultSet rs = stmt.executeQuery(sql)) {
+			while (rs.next()) {
+				// On récupère les champs nécessaires de l'enregistrement courant
+				String name = rs.getString("Identifiant");
+				float contrib = rs.getFloat("Contribution");
+				// On l'ajoute à la liste des résultats
+				result.put(name, contrib);
+			}
+		}
+		return result;
+	}
 }

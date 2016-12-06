@@ -5,11 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Test</title>
-        
+   
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<!-- On charge l'API Google -->
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -56,8 +52,5 @@
 		}
 
 	</script>
-    </head>
-    <body>
+
         <div id="piechart" style="width: 900px; height: 500px;"></div>
-    </body>
-</html>

@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="Jeu" method="POST">
+        
             <c:forEach var="jeu" varStatus="status" items="${jeu}">
                 <c:if test="${status.first}">
                 <%-- On met l'en-tête de la table --%>
@@ -27,6 +27,7 @@
                             <th>Action</th>
                         </tr>
                 </c:if>
+                        <form action="Jeu" method="POST">
                         <tr>
                             <td>
                                 ${jeu.gameId}
@@ -50,15 +51,17 @@
                             </td>
                             <td>
                                 <input type='submit' name='action' value='Editer'>
+                                <input type='hidden' name='id' value=${jeu.gameId}> 
                                 <input type='submit' name='action' value='Supprimer'>
                             </td>
                             
                         </tr>
+                                </form>
+
                             <c:if test="${status.last}">
                             </table>
                         </c:if>
             </c:forEach>
-        </form>
         <form action="Jeu" method="POST">
             <table border='1'>
                 <tr>

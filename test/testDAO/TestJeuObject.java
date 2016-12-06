@@ -82,6 +82,13 @@ public class TestJeuObject {
     }
     
     @Test
+    public void JeuByID() throws SQLException {
+        int id = 1;
+        
+        assertEquals(myDAO.GetJeuByID(id).getNom(),"abc");
+    }
+    
+    @Test
     public void testAddJeu() throws SQLException {
         String nom = "abc"; 
         int nbjmi = 2;

@@ -8,6 +8,7 @@ package servlet;
 import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
 import dataAccessObject.AccessJeuObject;
 import dataAccessObject.JeuEntity;
+import dataAccessObject.UtilisateurEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -19,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
@@ -51,9 +53,13 @@ public class Jeu extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-    
+        
         int gameID,nbJoueurMin,nbJoueurMax,proprietaireJeu;
         AccessJeuObject ajo;
+        String nom = request.getParameter("Nom");
+        String descript = request.getParameter("Description");
+        UtilisateurEntity User;
+        
         switch(request.getParameter("action")){
             case "Supprimer": 
                 gameID = Integer.parseInt(request.getParameter("idJeu"));
@@ -67,26 +73,35 @@ public class Jeu extends HttpServlet {
                 proprietaireJeu = Integer.parseInt(request.getParameter("proprietaireJeu"));
                 
                 ajo = new AccessJeuObject(getDataSource());
-                ajo.updateJeu("", nbJoueurMin, nbJoueurMax, "", proprietaireJeu, gameID);
                 
-                request.getRequestDispatcher("editJeu.jsp").forward(request, response);
+                JeuEntity jeu = ajo.GetJeuByID(gameID);
+                request.setAttribute("jeu", jeu);
+                System.out.println(jeu);
+                request.getRequestDispatcher("editeJeu.jsp").forward(request, response);
                 break;
             case "Ajouter":
-                System.out.println("test1");
-                String nom = request.getParameter("Nom");
-                System.out.println(nom);
-                String descript = request.getParameter("Description");
-                System.out.println(descript);
+                nom = request.getParameter("Nom");
+                descript = request.getParameter("Description");
                 nbJoueurMin = Integer.parseInt(request.getParameter("nbJoueurMin"));
-                System.out.println(nbJoueurMin);
                 nbJoueurMax = Integer.parseInt(request.getParameter("nbJoueurMax"));
-                System.out.println(nbJoueurMax);
                 proprietaireJeu = Integer.parseInt(request.getParameter("proprietaireJeu"));
-                System.out.println(proprietaireJeu);
+                User = (UtilisateurEntity) findUserInSession(request);
                 ajo = new AccessJeuObject(getDataSource());
-                System.out.println("test2");
-                ajo.addJeu(nom, nbJoueurMin, nbJoueurMax, descript, proprietaireJeu);
-                System.out.println("test3");
+                ajo.addJeu(nom, nbJoueurMin, nbJoueurMax, descript, User.getUserId());
+                break;
+            case "Modifier":
+                
+                nom = request.getParameter("Nom");
+                descript = request.getParameter("Description");
+                nbJoueurMin = Integer.parseInt(request.getParameter("nbJoueurMin"));
+                nbJoueurMax = Integer.parseInt(request.getParameter("nbJoueurMax"));
+                proprietaireJeu = Integer.parseInt(request.getParameter("proprietaireJeu"));
+                
+                /*ajo = new AccessJeuObject(getDataSource());
+                
+                ajo.updateJeu(nom, nbJoueurMin, nbJoueurMax,descript, proprietaireJeu, Jeu.getGameId());
+                request.setAttribute("id",User.getUserId());
+                request.getRequestDispatcher("listJeux.jsp").forward(request, response);*/
                 break;
         }
         AccessJeuObject dao = new AccessJeuObject(getDataSource());
@@ -96,16 +111,11 @@ public class Jeu extends HttpServlet {
         request.getRequestDispatcher("listJeux.jsp").forward(request, response);   
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
+    private Object findUserInSession(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		return (session == null) ? null : session.getAttribute("user");
+	}
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {

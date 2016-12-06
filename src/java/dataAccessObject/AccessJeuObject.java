@@ -70,6 +70,36 @@ public class AccessJeuObject {
 		return result;
 	}
     
+     public JeuEntity GetJeuByID(int ID) throws SQLException {
+		JeuEntity result = null;
+
+		String sql = "SELECT * from Jeu where ID = ?";
+		// Ouvrir une connexion
+		Connection connection = myDataSource.getConnection();
+		// On crée un statement pour exécuter une requête
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, ID);
+		// Un ResultSet pour parcourir les enregistrements du résultat
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+                    int JeuId = rs.getInt("ID");
+                    String nom = rs.getString("Nom");
+                    int njmi = rs.getInt("NbJoueurMin"); 
+                    int njma = rs.getInt("NbJoueurMax");
+                    String desc = rs.getString("Description");
+                    int prop = rs.getInt("Proprietaire");
+                
+                    result = new JeuEntity(JeuId, nom, njmi, njma, desc, prop);
+                    
+                }   
+		// On ferme tout
+		rs.close();
+		stmt.close();
+		connection.close();
+
+		return result;
+	}
+    
     public boolean updateJeu(String nom, int njmi, int njma,
                String desc, int prop, int id) throws SQLException {
 		String sql = "update Jeu set Nom = ?, NbJoueurMin = ?,NbJoueurMax = ?, Description = ?, Proprietaire = ? where ID = ?";

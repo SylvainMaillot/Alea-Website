@@ -9,13 +9,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     
     <body>
         
-        <p>Bonjour ${prenom} ${nom} vous avez donné ${contrib} € à Alea :) </p>
+        <p> Bonjour ${prenom} ${nom} vous avez donné ${contrib} € à Alea :) </p>
         <%@ include file="contribJoueurGraph.jsp"%>
         
         

@@ -42,7 +42,7 @@
 		// Afficher les ventes par client
 		function doAjax() {
 			$.ajax({
-				url: "jeuxParjoueur",
+				url: "contribParJoueur",
 				dataType: "json",
 				success: // La fonction qui traite les résultats
 					function (result) {
@@ -64,14 +64,14 @@
 				success: // La fonction qui traite les résultats
 					function (result) {
 						// On reformate le résultat comme un tableau
-						var chartData = [];
+						var chartData2 = [];
 						// On met le descriptif des données
-						chartData.push(["name", "totalJeu"]);
+						chartData2.push(["name", "totalJeu"]);
 						for(var user in result) {
-							chartData.push([user, result[user]]);
+							chartData2.push([user, result[user]]);
 						}
 						// On dessine le graphique
-						drawChart2(chartData);
+						drawChart2(chartData2);
 					},
 				error: showError
 			});

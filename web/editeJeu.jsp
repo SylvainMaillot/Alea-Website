@@ -25,7 +25,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type='text' name='Nom' value=${jeu.nom}>
+                        <input type='text' name='Nom' value="${jeu.nom}">
                     </td>
                     <td>
                         <input type='number' name='nbJoueurMin' min=1 max=100 value=${jeu.nbJoueurMin}>
@@ -34,12 +34,13 @@
                         <input type='number' name='nbJoueurMax' min=0 max=100 value=${jeu.nbJoueurMax}>
                     </td>
                     <td>
-                        <input type='text' name='Description' value=${jeu.nom}>
+                        <input type='text' name='Description' value="${jeu.description}">
                     </td>
                     <td>
                         <input type='number' name='proprietaireJeu' min=0 value=${jeu.proprietaireID}>
                     </td>
                     <td>
+                        <input type='hidden' name='id' value=${jeu.gameId}>
                         <input type='submit' name='action' value='Modifier'>
                     </td>      
                 </tr>

@@ -13,7 +13,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
+        <form method="POST">
+            <input type='submit' name='action' value='Accueil'>
+        </form>
             <c:forEach var="jeu" varStatus="status" items="${jeu}">
                 <c:if test="${status.first}">
                 <%-- On met l'en-tête de la table --%>

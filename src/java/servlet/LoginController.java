@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 	 * @throws IOException if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
+		throws ServletException, IOException, SQLException {
 		request.getSession(true);
 		// Quelle action a appelé cette servlet ?
 		String action = request.getParameter("action");
@@ -55,24 +55,34 @@ public class LoginController extends HttpServlet {
 			switch (action) {
 				case "login":
 					checkLogin(request);
-					break;
+                                    break;
 				case "logout":
 					doLogout(request);
-					break;
+                                    break;
                                 case "update":
                                         doUpdate(request);
-                                        break;
+                                    break;
                                 case "updateInfo":
                                         request.setAttribute("user", user);
                                         request.getRequestDispatcher("/UpdateInfos").include(request, response);
-                                        break;
+                                    break;
                                 case "liste des joueurs":
-                                    request.getRequestDispatcher("listPlayer.jsp").forward(request, response);
+                                        request.getRequestDispatcher("listPlayer.jsp").forward(request, response);
                                     break;
                                 case "liste des jeux":
                                         request.setAttribute("id",user.getUserId());
                                         request.getRequestDispatcher("/ListJeux").include(request, response);
-                                        break;
+                                    break;
+                                case "M'inscrire":
+                                        String ID = request.getParameter("pseudo");
+                                        String nom = request.getParameter("nom");
+                                        String prenom = request.getParameter("prenom");
+                                        String passe = request.getParameter("passe");
+                                        String mail = request.getParameter("email");
+                                        AccessUtilisateurObject ajo = new AccessUtilisateurObject(getDataSource());
+                                        ajo.newUtilisateur(ID, nom, prenom, passe, mail);
+                                        //request.getRequestDispatcher("Accueil.jsp").forward(request, response);
+                                    break;
                         }
 		}
                 
@@ -107,7 +117,11 @@ public class LoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
 	}
 
 	/**
@@ -121,7 +135,11 @@ public class LoginController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
 	}
 
 	/**

@@ -33,7 +33,10 @@ public class UserInterface extends HttpServlet {
         UtilisateurEntity user = (UtilisateurEntity) request.getAttribute("user");
         request.getSession(true);        
         
+        
         String jspView = "playerInfos.jsp";
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         request.setAttribute("prenom", user.getPrenom());
         request.setAttribute("nom", user.getNom());
         request.setAttribute("contrib", user.getContribution());

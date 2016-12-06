@@ -5,6 +5,7 @@ import dataAccessObject.AccessJeuObject;
 import dataAccessObject.AccessUtilisateurObject;
 import dataAccessObject.UtilisateurEntity;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -74,11 +75,18 @@ public class LoginController extends HttpServlet {
                                         request.getRequestDispatcher("/ListJeux").include(request, response);
                                     break;
                                 case "M'inscrire":
-                                        String ID = request.getParameter("pseudo");
-                                        String nom = request.getParameter("nom");
-                                        String prenom = request.getParameter("prenom");
-                                        String passe = request.getParameter("passe");
-                                        String mail = request.getParameter("email");
+                                        request.setCharacterEncoding("UTF-8");
+                                        response.setCharacterEncoding("UTF-8");
+                                        String S1 = request.getParameter("pseudo");
+                                        String ID = new String(S1.getBytes(),Charset.forName("UTF-8"));
+                                        String S2 = request.getParameter("nom");
+                                        String nom = new String(S2.getBytes(),Charset.forName("UTF-8"));
+                                        String S3 = request.getParameter("prenom");
+                                        String prenom = new String(S3.getBytes(),Charset.forName("UTF-8"));
+                                        String S4 = request.getParameter("passe");
+                                        String passe = new String(S4.getBytes(),Charset.forName("UTF-8"));
+                                        String S5 = request.getParameter("email");
+                                        String mail = new String(S5.getBytes(),Charset.forName("UTF-8"));
                                         AccessUtilisateurObject ajo = new AccessUtilisateurObject(getDataSource());
                                         ajo.newUtilisateur(ID, nom, prenom, passe, mail);
                                         //request.getRequestDispatcher("Accueil.jsp").forward(request, response);
@@ -153,8 +161,10 @@ public class LoginController extends HttpServlet {
 	}// </editor-fold>
 
 	private void checkLogin(HttpServletRequest request) {
-		String login = request.getParameter("id");
-		String password = request.getParameter("pass");
+		String S1 = request.getParameter("id");
+                String login = new String(S1.getBytes(),Charset.forName("UTF-8"));
+		String S2 = request.getParameter("pass");
+                String password = new String(S2.getBytes(),Charset.forName("UTF-8"));
 
 		try {
 			AccessUtilisateurObject dao = new AccessUtilisateurObject(getDataSource());

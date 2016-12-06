@@ -156,9 +156,7 @@ public class AccessUtilisateurObject {
        public boolean newUtilisateur(String ident, String nom, String prenom, 
                String psswd,String mail) throws SQLException {
                
-		String sql = "INSERT INTO Utilisateur(Identifiant,MotDePasse,Email,"
-                        + "Prenom,Nom,Contribution,TypeUtilisateur) VALUES (?,?,"
-                        + "?,?,?,?,?)";
+		String sql = "INSERT INTO Utilisateur(Identifiant,MotDePasse,Email,Prenom,Nom,Contribution,TypeUtilisateur) VALUES (?,?,?,?,?,?,?)";
                     // Ouvrir une connexion
                     Connection connection = myDataSource.getConnection();
                     // On crée un statement pour exécuter une requête

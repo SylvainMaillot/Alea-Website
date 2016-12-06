@@ -4,17 +4,16 @@
     Author     : neiko
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <META http-equiv="Content-Type" content="text/html" charset="UTF-8">
         <title>JSP Page</title>
     </head>
     
     <body>
-        
         <p> Bonjour ${prenom} ${nom} vous avez donné ${contrib} € à Alea :) </p>
         <%@ include file="contribJoueurGraph.jsp"%>
         

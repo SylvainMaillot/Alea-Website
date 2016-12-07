@@ -81,5 +81,6 @@
         <h1>Liste des joueurs</h1>
 	<!-- Le graphique apparaît ici -->
         <div id="joueurs"></div>
+        
     </body>
 </html>

@@ -72,6 +72,8 @@ public class AccessSoireeObject {
 		return rs != 0;
 	}
      
+     
+     //Fonction pour supprimer une soirée dans la BD
      public boolean rmSoiree(int id) throws SQLException {
            boolean result = true;
            String sql = "delete from Soiree where ID = ?";

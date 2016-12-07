@@ -12,15 +12,29 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <p>Selectionnez les champs à modifier</p>
+        <h1>Page de Modification</h1>
         <form  method="POST">
-            <label>Prenom : </label><input type="text" name="prenom" value=${user.prenom} /> <br>
-            <label>Nom : </label><input type="text" name="nom" value=${user.nom} /> <br>
-            <label>Mot de passe : </label><input type="password" name="passwd" value=${user.motDePasse} /> <br>
-            <label>Email : </label><input type="text" name="mail" value=${user.email} /> <br>
-            <label>Contribution : </label><input type="text" name="contrib" value=${user.contribution} /> <br>
-            <label>Type d'utilisateur : </label><input type="text" name="type" value=${user.typeUtilisateur} /> <br>
-            <input type='submit' name='action' value='update'>
+            
+            <table> <tr>
+            <td><label for="prenom"><strong>Prenom :</strong></label></td>
+            <td><input type="text" name="prenom" value=${user.prenom} /></td>
+            </tr> <tr>
+            <td><label for="nom"><strong>Nom :</strong></label></td>
+            <td><input type="text" name="nom" value=${user.nom} /></td>
+            </tr> <tr>
+            <td><label for="passwd"><strong>Mot de passe :</strong></label></td>
+            <td><input type="password" name="passwd" value=${user.motDePasse} /></td>
+            </tr> <tr>
+            <td><label for="mail"><strong>Adresse e-mail :</strong></label></td>
+            <td><input type="email" name="mail" value=${user.email} /></td>
+            </tr> <tr>
+            <td><label for="contrib"><strong>Contribution :</strong></label></td>
+            <td><input type="text" name="contrib" value=${user.contribution} /></td>
+            <input type="hidden" name="type" value=${user.typeUtilisateur} />
+            </table>
+            
+            <input type='submit' name='action' value='Mettre à jour'>
+            <input type='submit' name='action' value='Annuler'>
         </form>
     </body>
 </html>

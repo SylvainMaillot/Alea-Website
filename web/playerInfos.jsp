@@ -15,7 +15,7 @@
     </head>
     
     <body>
-        <p> Bonjour ${prenom} ${nom} alias numéro ${id} vous avez donné ${contrib} € à Alea! Merci mon ami </p>
+        <p> Bonjour ${prenom} ${nom} alias numéro ${id} vous avez donné ${contrib} Euro à Alea! Merci mon ami </p>
         <%@ include file="contribJoueurGraph.jsp"%>
         
         
@@ -25,7 +25,6 @@
             <input type='submit' name='action' value='logout'>
         </form>
         <form action="Jeu" method="POST">
-            
             <input type='hidden' name='id' value=${id}>
             <input type='submit' name='action' value='liste des jeux'>
         </form>

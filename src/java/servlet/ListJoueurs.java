@@ -53,7 +53,6 @@ public class ListJoueurs extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         
         try (PrintWriter out = response.getWriter()) {
-           
             AccessUtilisateurObject dao = new AccessUtilisateurObject(getDataSource());
             Gson gson = new Gson();
             String gsonData = gson.toJson(dao.listUtilisateur());

@@ -26,7 +26,7 @@ import javax.sql.DataSource;
  * @author Hp
  */
 @WebServlet(name = "jeuxParjoueur", urlPatterns = {"/jeuxParjoueur"})
-public class jeuxParJoueur extends HttpServlet {
+public class jeuxParJoueurJson extends HttpServlet {
     
     public DataSource getDataSource() throws SQLException {
 		com.mysql.jdbc.jdbc2.optional.MysqlDataSource ds = new MysqlConnectionPoolDataSource();

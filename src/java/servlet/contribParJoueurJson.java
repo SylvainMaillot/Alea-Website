@@ -25,7 +25,7 @@ import javax.sql.DataSource;
  * @author Hp
  */
 @WebServlet(name = "contribParJoueur", urlPatterns = {"/contribParJoueur"})
-public class contribParJoueur extends HttpServlet {
+public class contribParJoueurJson extends HttpServlet {
 
     
         public DataSource getDataSource() throws SQLException {

@@ -4,16 +4,16 @@
     Author     : neiko
 --%>
 
-<%@page language = "java" contentType="text/html; charset= "  pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=">
         <title>JSP Page</title>
     </head>
     <body>
         <p>Selectionnez les champs à modifier</p>
-        <form action="${pageContext.request.contextPath}/LoginController" method="POST">
+        <form  method="POST">
             <label>Prenom : </label><input type="text" name="prenom" value=${user.prenom} /> <br>
             <label>Nom : </label><input type="text" name="nom" value=${user.nom} /> <br>
             <label>Mot de passe : </label><input type="password" name="passwd" value=${user.motDePasse} /> <br>

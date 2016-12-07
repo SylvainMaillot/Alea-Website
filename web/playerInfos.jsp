@@ -3,8 +3,9 @@
     Created on : Oct 28, 2016, 6:05:27 PM
     Author     : neiko
 --%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -14,18 +15,25 @@
     </head>
     
     <body>
-        <p> Bonjour ${prenom} ${nom} vous avez donné ${contrib} € à Alea :) </p>
+        <p> Bonjour ${prenom} ${nom} alias numéro ${id} vous avez donné ${contrib} € à Alea! Merci mon ami </p>
         <%@ include file="contribJoueurGraph.jsp"%>
         
         
         
         <form method="POST">
             <input type='submit' name='action' value="updateInfo">
-            <input type='submit' name='action' value='liste des jeux'>
             <input type='submit' name='action' value='logout'>
         </form>
+        <form action="Jeu" method="POST">
+            
+            <input type='hidden' name='id' value=${id}>
+            <input type='submit' name='action' value='liste des jeux'>
+        </form>
+        <form action="Soiree" method="POST">
+            <input type='submit' name='action' value='Voir les soirées'>
+        </form>
         <form method="link" action="listPlayer.jsp">
-        <input type="submit" value="liste des joueurs">
+            <input type="submit" value="liste des joueurs">
         </form>
         
         

@@ -64,15 +64,21 @@ public class LoginController extends HttpServlet {
                                         doUpdate(request);
                                     break;
                                 case "updateInfo":
+                                        
+                                        
+                                        
                                         request.setAttribute("user", user);
-                                        request.getRequestDispatcher("/UpdateInfos").include(request, response);
+                                        request.getRequestDispatcher("updateInfos.jsp").forward(request, response);
+                                    
+                                        
+                                        //request.getRequestDispatcher("/UpdateInfos").include(request, response);
                                     break;
                                 case "liste des joueurs":
                                         request.getRequestDispatcher("listPlayer.jsp").forward(request, response);
                                     break;
                                 case "liste des jeux":
                                         request.setAttribute("id",user.getUserId());
-                                        request.getRequestDispatcher("/ListJeux").include(request, response);
+                                        request.getRequestDispatcher("/Jeu").include(request, response);
                                     break;
                                 case "M'inscrire":
                                         request.setCharacterEncoding("UTF-8");
@@ -95,10 +101,14 @@ public class LoginController extends HttpServlet {
                                       
                                         
                                     break;
+                                    
                         }
 		}
                 
 
+                
+                
+                
 		// Est-ce que l'utilisateur est connecté ?
 		// On cherche l'attribut customer dans la session
 		Object User = findUserInSession(request);
@@ -108,9 +118,18 @@ public class LoginController extends HttpServlet {
 			jspView = "Accueil.jsp";
 
 		} else { // L'utilisateur est connecté
-			// On choisit la page d'affichage
-                        request.setAttribute("user", user);
-			request.getRequestDispatcher("/UserInterface").include(request, response);
+			// On impose l'encodage
+                        request.setCharacterEncoding("UTF-8");
+                        response.setCharacterEncoding("UTF-8");
+                        // Transmission des données
+                        request.setAttribute("prenom", user.getPrenom());
+                        request.setAttribute("nom", user.getNom());
+                        request.setAttribute("contrib", user.getContribution());
+                        request.setAttribute("id", user.getUserId());
+                        // On choisit la page d'affichage
+                        
+                        jspView = "playerInfos.jsp";
+                        request.getRequestDispatcher(jspView).forward(request, response);
 		}
 		// On va vers la page choisie
 		request.getRequestDispatcher(jspView).forward(request, response);

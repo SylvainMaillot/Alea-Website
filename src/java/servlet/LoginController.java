@@ -62,7 +62,7 @@ public class LoginController extends HttpServlet {
                                 //déconnection
                                 doLogout(request);
                             break;
-                            case "Mettre à jour":
+                            case "Mettre a jour":
                                 //Mise a jour de l'utilisateur
                                 doUpdate(request);
                             break;

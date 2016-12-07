@@ -10,6 +10,7 @@ import dataAccessObject.AccessJeuObject;
 import dataAccessObject.AccessSoireeObject;
 import dataAccessObject.JeuEntity;
 import dataAccessObject.SoireeEntity;
+import dataAccessObject.UtilisateurEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
@@ -25,6 +26,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
@@ -59,6 +61,7 @@ public class Soiree extends HttpServlet {
             throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         
+        
         AccessSoireeObject dao = new AccessSoireeObject(getDataSource());
         ArrayList<SoireeEntity> listSoiree;
         SoireeEntity soiree;
@@ -66,10 +69,11 @@ public class Soiree extends HttpServlet {
         String nom, desc;
         java.util.Date jour;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        UtilisateurEntity User = (UtilisateurEntity) findUserInSession(request);
         
         switch(request.getParameter("action")){
             case "Accueil":
-                request.getRequestDispatcher("playerInfos.jsp").forward(request, response);
+                request.getRequestDispatcher("LoginController").include(request, response);
                 break;
             case "Supprimer": 
                 soireeID = Integer.parseInt(request.getParameter("soireeID"));
@@ -109,8 +113,7 @@ public class Soiree extends HttpServlet {
                 request.getRequestDispatcher("listSoiree.jsp").forward(request, response);
                 break;
                 
-            case "WarSoir":
-                
+            case "Voir les soirees":
                 listSoiree = dao.listSoiree();
                 request.setAttribute("soirees", listSoiree);
                 request.getRequestDispatcher("listSoiree.jsp").forward(request, response);
@@ -169,4 +172,8 @@ public class Soiree extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+        private Object findUserInSession(HttpServletRequest request) {
+            HttpSession session = request.getSession(false);
+            return (session == null) ? null : session.getAttribute("user");
+    }
 }

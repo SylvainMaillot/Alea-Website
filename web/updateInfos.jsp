@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Page de Modification</h1>
-        <form  method="POST">
+        <form action="LoginController" method="POST">
             
             <table> <tr>
             <td><label for="prenom"><strong>Prenom :</strong></label></td>
@@ -33,7 +33,7 @@
             <input type="hidden" name="type" value=${user.typeUtilisateur} />
             </table>
             
-            <input type='submit' name='action' value='Mettre à jour'>
+            <input type='submit' name='action' value='Mettre a jour'>
             <input type='submit' name='action' value='Annuler'>
         </form>
     </body>

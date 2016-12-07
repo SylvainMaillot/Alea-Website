@@ -55,8 +55,7 @@
 						}
 						// On dessine le graphique
 						drawChart(chartData);
-					},
-				error: showError
+					}
 			});
                         $.ajax({
 				url: "jeuxParjoueur",
@@ -72,8 +71,7 @@
 						}
 						// On dessine le graphique
 						drawChart2(chartData2);
-					},
-				error: showError
+					}
 			});
 		}
                 

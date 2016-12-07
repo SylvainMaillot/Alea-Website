@@ -66,7 +66,7 @@ public class Jeu extends HttpServlet {
         switch(request.getParameter("action")){
             case "Accueil":
                 //retourner a la jsp l'accueil
-                request.getRequestDispatcher("playerInfos.jsp").forward(request, response);
+                request.getRequestDispatcher("LoginController").include(request, response);
                 break;
             case "Supprimer": 
                 //déclaration des variables utilisées

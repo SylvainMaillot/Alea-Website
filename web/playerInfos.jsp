@@ -25,7 +25,6 @@
             <input type='submit' name='action' value='logout'>
         </form>
         <form action="Jeu" method="POST">
-            
             <input type='hidden' name='id' value=${id}>
             <input type='submit' name='action' value='liste des jeux'>
         </form>

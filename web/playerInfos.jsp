@@ -15,7 +15,7 @@
     </head>
     
     <body>
-        <p> Bonjour ${prenom} ${nom} alias numéro ${id} vous avez donné ${contrib} € à Alea! Merci mon ami </p>
+        <p> Bonjour ${prenom} ${nom} alias numéro ${id} vous avez donné ${contrib} Euro à Alea! Merci mon ami </p>
         <%@ include file="contribJoueurGraph.jsp"%>
         
         

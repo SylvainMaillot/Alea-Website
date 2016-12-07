@@ -62,9 +62,12 @@ public class LoginController extends HttpServlet {
                                 //déconnection
                                 doLogout(request);
                             break;
-                            case "update":
+                            case "Mettre à jour":
                                 //Mise a jour de l'utilisateur
                                 doUpdate(request);
+                            break;
+                            case "Annuler":
+                                request.getRequestDispatcher("playerInfos.jsp").include(request, response);
                             break;
                             case "updateInfo":
                                 request.setAttribute("user", user);

@@ -15,9 +15,9 @@ DROP TABLE IF EXISTS Programme;
 /*Creation des tables*/
 /*type : 0 -> non enregistre | 1 -> enregistre | 2 -> adherant | 3 -> admin*/
 CREATE TABLE Utilisateur( ID INT AUTO_INCREMENT,
-				Identifiant VARCHAR(20) unique,
-				MotDePasse VARCHAR(40),
-				Email VARCHAR(80) unique,
+				Identifiant VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL UNIQUE,
+				MotDePasse VARCHAR(40) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+				Email VARCHAR(80) UNIQUE,
 				Prenom VARCHAR(20) NOT NULL, 
 				Nom VARCHAR(30) NOT NULL,
 				Contribution DECIMAL,
@@ -25,10 +25,10 @@ CREATE TABLE Utilisateur( ID INT AUTO_INCREMENT,
 				PRIMARY KEY (ID));
 
 CREATE TABLE Jeu( ID INT AUTO_INCREMENT,
-			Nom VARCHAR(80),
+			Nom VARCHAR(80) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
 			NbJoueurMin INT,
 			NbJoueurMax INT,
-			Description VARCHAR(150),
+			Description VARCHAR(150) CHARACTER SET utf8 COLLATE utf8_bin,
 			Proprietaire INT,
 			PRIMARY KEY (ID),
 			FOREIGN KEY (Proprietaire) REFERENCES Utilisateur(ID) ON DELETE CASCADE);

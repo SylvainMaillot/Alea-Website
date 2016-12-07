@@ -172,16 +172,20 @@ public class LoginController extends HttpServlet {
 
 		try {
 			AccessUtilisateurObject dao = new AccessUtilisateurObject(getDataSource());
-			user = dao.getUtilisateurByLoggin(login, password);
-			if (user != null) { // On a trouvé la combinaison login / password
+			try {
+                            user = dao.getUtilisateurByLoggin(login, password);
+                            if (user != null) { // On a trouvé la combinaison login / password
 				// On stocke l'utilisateur dans la session
 				HttpSession session = request.getSession(true); // démarre la session
 				session.setAttribute("user", user);
-				
-			} else { // On positionne un message d'erreur pour l'afficher dans la JSP
-				request.setAttribute("errorMessage", "Login/Password incorrect");
-			}
-
+                            } else {
+                                request.setAttribute("errorMessage", "Login/Password incorrect");
+                                    }
+                        } 
+                        catch (Exception e) {
+                            request.setAttribute("errorMessage", "Login/Password incorrect");
+                        }
+                        
 		} catch (SQLException ex) {
 			Logger.getLogger("loginMVC").log(Level.SEVERE, "SQL Exception", ex);
 		}

@@ -20,7 +20,7 @@
         
         
         
-        <form method="POST">
+        <form action="LoginController" method="POST">
             <input type='submit' name='action' value="updateInfo">
             <input type='submit' name='action' value='logout'>
         </form>

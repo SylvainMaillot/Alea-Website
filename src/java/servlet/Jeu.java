@@ -64,8 +64,7 @@ public class Jeu extends HttpServlet {
         
         switch(request.getParameter("action")){
             case "Accueil":
-                
-                request.getRequestDispatcher("/LoginController").include(request, response);
+                request.getRequestDispatcher("playerInfos.jsp").forward(request, response);
                 break;
             case "Supprimer": 
                 gameID = Integer.parseInt(request.getParameter("idJeu"));

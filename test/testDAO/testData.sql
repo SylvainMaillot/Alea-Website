@@ -11,9 +11,9 @@ DROP TABLE Programme IF EXISTS;
 /*Creation des tables*/
 
 CREATE TABLE Utilisateur(ID INTEGER IDENTITY,
-                            Identifiant VARCHAR(20),
+                            Identifiant VARCHAR(20) Unique,
                             MotDePasse VARCHAR(40),
-                            Email VARCHAR(80),
+                            Email VARCHAR(80) Unique,
                             Prenom VARCHAR(20) NOT NULL, 
                             Nom VARCHAR(30) NOT NULL,
                             Contribution DECIMAL(4,2),

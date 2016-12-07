@@ -20,7 +20,6 @@
                     <th>Nombre de joueurs min</th>
                     <th>Nombre de joueurs max</th>
                     <th>Description</th>
-                    <th>proprietaire du jeu</th>
                     <th>Action</th>
                 </tr>
                 <tr>
@@ -35,9 +34,6 @@
                     </td>
                     <td>
                         <input type='text' name='Description' value="${jeu.description}">
-                    </td>
-                    <td>
-                        <input type='number' name='proprietaireJeu' min=0 value=${jeu.proprietaireID}>
                     </td>
                     <td>
                         <input type='hidden' name='id' value=${jeu.gameId}>

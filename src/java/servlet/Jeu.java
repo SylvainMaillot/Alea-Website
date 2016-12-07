@@ -87,7 +87,7 @@ public class Jeu extends HttpServlet {
                 descript = request.getParameter("Description");
                 nbJoueurMin = Integer.parseInt(request.getParameter("nbJoueurMin"));
                 nbJoueurMax = Integer.parseInt(request.getParameter("nbJoueurMax"));
-                proprietaireJeu = Integer.parseInt(request.getParameter("proprietaireJeu"));
+                //proprietaireJeu = Integer.parseInt(request.getParameter("proprietaireJeu"));
                 ajo = new AccessJeuObject(getDataSource());
                 ajo.addJeu(nom, nbJoueurMin, nbJoueurMax, descript, User.getUserId());
                 request.setAttribute("jeu", ajo.listJeuUtilisateur(User.getUserId()));
@@ -99,12 +99,13 @@ public class Jeu extends HttpServlet {
                 descript = request.getParameter("Description");
                 nbJoueurMin = Integer.parseInt(request.getParameter("nbJoueurMin"));
                 nbJoueurMax = Integer.parseInt(request.getParameter("nbJoueurMax"));
-                proprietaireJeu = Integer.parseInt(request.getParameter("proprietaireJeu"));
+                //proprietaireJeu = Integer.parseInt(request.getParameter("proprietaireJeu"));
                 
                 ajo = new AccessJeuObject(getDataSource());
                 gameID = Integer.parseInt(request.getParameter("id"));
-                ajo.updateJeu(nom, nbJoueurMin, nbJoueurMax,descript, proprietaireJeu,gameID);
                 request.setAttribute("id",User.getUserId());
+                ajo.updateJeu(nom, nbJoueurMin, nbJoueurMax,descript, User.getUserId(),gameID);
+                
                 request.setAttribute("jeu", ajo.listJeuUtilisateur(User.getUserId()));
                 request.getRequestDispatcher("listJeux.jsp").forward(request, response);
                 break;

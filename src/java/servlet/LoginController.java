@@ -88,8 +88,12 @@ public class LoginController extends HttpServlet {
                                         String S5 = request.getParameter("email");
                                         String mail = new String(S5.getBytes(),Charset.forName("UTF-8"));
                                         AccessUtilisateurObject ajo = new AccessUtilisateurObject(getDataSource());
-                                        ajo.newUtilisateur(ID, nom, prenom, passe, mail);
-                                        //request.getRequestDispatcher("Accueil.jsp").forward(request, response);
+                                        try {ajo.newUtilisateur(ID, nom, prenom, passe, mail);} catch (Exception e){
+                                        
+                                            request.setAttribute("errorMessage", "Utilisateur dejà crée !");
+                                            request.getRequestDispatcher("inscription.jsp").forward(request, response);}
+                                      
+                                        
                                     break;
                         }
 		}

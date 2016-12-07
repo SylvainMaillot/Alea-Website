@@ -110,6 +110,7 @@ public class TestUtilisateurObject {
         assertTrue(myDAO.newUtilisateur(ident, Nom, Prenom, MotDePasse, Email));
         UtilisateurEntity us1 = myDAO.getUtilisateurByLoggin(ident, MotDePasse);
         assertEquals(Prenom, us1.getPrenom());
+        assertFalse(myDAO.newUtilisateur(ident, Nom, Prenom, MotDePasse, Email));
     }
     
     @Test

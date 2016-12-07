@@ -15,9 +15,9 @@ DROP TABLE IF EXISTS Programme;
 /*Creation des tables*/
 /*type : 0 -> non enregistre | 1 -> enregistre | 2 -> adherant | 3 -> admin*/
 CREATE TABLE Utilisateur( ID INT AUTO_INCREMENT,
-				Identifiant VARCHAR(20),
+				Identifiant VARCHAR(20) unique,
 				MotDePasse VARCHAR(40),
-				Email VARCHAR(80),
+				Email VARCHAR(80) unique,
 				Prenom VARCHAR(20) NOT NULL, 
 				Nom VARCHAR(30) NOT NULL,
 				Contribution DECIMAL,

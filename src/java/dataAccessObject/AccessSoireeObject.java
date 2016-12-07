@@ -111,5 +111,34 @@ public class AccessSoireeObject {
             connection.close();
             return result;
        }
+     
+     public SoireeEntity GetSoireeByID(int ID) throws SQLException {
+		SoireeEntity result = null;
+
+		String sql = "SELECT * from Soiree where ID = ?";
+		// Ouvrir une connexion
+		Connection connection = myDataSource.getConnection();
+		// On crée un statement pour exécuter une requête
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, ID);
+		// Un ResultSet pour parcourir les enregistrements du résultat
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+                    int soireeId = rs.getInt("ID");
+                    Date jour = rs.getDate("Jour");
+                    String nom = rs.getString("Nom");
+                    int nbj = rs.getInt("NbJoueur"); 
+                    int nba = rs.getInt("NbAdherant");
+                    String desc = rs.getString("Description");
+                
+                    result = new SoireeEntity(soireeId, jour, nom, nbj, nba, desc);
+                }   
+		// On ferme tout
+		rs.close();
+		stmt.close();
+		connection.close();
+
+		return result;
+	}
     
 }

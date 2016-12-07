@@ -29,7 +29,7 @@
             <input type='submit' name='action' value='liste des jeux'>
         </form>
         <form action="Soiree" method="POST">
-            <input type='submit' name='action' value='Voir les soirées'>
+            <input type='submit' name='action' value='Voir les soirees'>
         </form>
         <form method="link" action="listPlayer.jsp">
             <input type="submit" value="liste des joueurs">

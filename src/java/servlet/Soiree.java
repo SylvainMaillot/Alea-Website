@@ -109,7 +109,7 @@ public class Soiree extends HttpServlet {
                 request.getRequestDispatcher("listSoiree.jsp").forward(request, response);
                 break;
                 
-            case "WarSoir":
+            case "Voir les soirees":
                 
                 listSoiree = dao.listSoiree();
                 request.setAttribute("soirees", listSoiree);

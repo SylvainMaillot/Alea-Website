@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import javax.sql.DataSource;
 
 /**
@@ -48,7 +46,7 @@ public class AccessProgrammeObject {
      
      public boolean rmUser2Soiree(int soireeID, int userID) throws SQLException {
            boolean result = true;
-           String sql = "delete from Programme where SoireeID = ? and UtilisateurID = ?";
+           String sql = "delete from Programme where SoireeID = ? and JeuID = ?";
            Connection connection = myDataSource.getConnection();
            PreparedStatement stmt = connection.prepareStatement(sql);
            stmt.setInt(1, soireeID);
@@ -64,46 +62,39 @@ public class AccessProgrammeObject {
        }
 
      public Map<Integer,Integer> nbUser2Soiree() throws SQLException {
-	Map<Integer,Integer> result = new HashMap<>();
-	String sql = "select soireeID,count(UtilisateurID) as total from Programme group by soireeID;";
-	try(Connection connection = myDataSource.getConnection();
+	Map<Integer,Integer> result = null;
+	String sql = "select soireeID,count(UtilisateurID) as total from Programme group by soireeID"
+	Connection connection = myDataSource.getConnection();
 	Statement stmt = connection.createStatement();
-	ResultSet rs = stmt.executeQuery(sql)) {
-            while(rs.next()) {
-                    int soiree = rs.getInt("soireeID");
-                    int nb = rs.getInt("total");
-                    result.put(soiree,nb);
-                }
-            }
+	ResultSet rs = stmt.executeQuery(sql);
+	while(rs.next()) {
+		int soireeID = rs.getInt("soireeID");
+		int nbUser = rs.getInt("total")
+		result.put(soireeID,nbUser);
+	}
 	return result;	
 	}
-
 //TODO
-
-    /**
-     *
-     * @param soireeID
-     * @return
-     * @throws SQLException
-     */
-     public Map<Integer,ArrayList<Integer>> listIdUser2Soiree() throws SQLException {
-            Map<Integer,ArrayList<Integer>> result = new HashMap<>();
-            ArrayList<Integer> tmp = new ArrayList<>();
-            String sql = "select * from Programme;";
+     public ArrayList<SoireeEntity> listJeu2Soiree(int jeuID) throws SQLException {
+            ArrayList<SoireeEntity> result = new ArrayList<>();
+            String sql = "select * from Programme right join Soiree s on Programme.SoireeID"
+                    + " = s.ID where Programme.JeuID = ?;";
             Connection connection = myDataSource.getConnection();
             // On crée un statement pour exécuter une requête
-            Statement stmt = connection.createStatement();
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, jeuID);
             // Un ResultSet pour parcourir les enregistrements du résultat
-            ResultSet rs = stmt.executeQuery(sql);
-            int s=0;
+            ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
-                int soiree = rs.getInt("SoireeID");
-                int userID = rs.getInt("UtilisateurID");
-                if(soiree != s)
-                    tmp = new ArrayList<>();
-                s=soiree;
-                tmp.add(userID);
-                result.put(soiree,tmp);
+                int soireeId = rs.getInt("ID");
+                Date jour = rs.getDate("Jour");
+                String nom = rs.getString("Nom");
+                int nbj = rs.getInt("NbJoueur"); 
+                int nba = rs.getInt("NbAdherant");
+                String desc = rs.getString("Description");
+                
+                SoireeEntity s = new SoireeEntity(soireeId, jour, nom, nbj, nba, desc);
+                result.add(s);
             }
             stmt.close();
             connection.close();

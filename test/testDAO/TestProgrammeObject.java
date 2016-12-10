@@ -68,22 +68,13 @@ public class TestProgrammeObject {
     
     @Test
     public void testAddJeu2Soiree() throws SQLException {
-        assertFalse(myDAO.addJeu2Soiree(1,1));
-        assertTrue(myDAO.addJeu2Soiree(1,4));
+        assertFalse(myDAO.addUser2Soiree(1,1));
+        assertTrue(myDAO.addUser2Soiree(1,4));
     }
     
     @Test
     public void testRmJeu2Soiree() throws SQLException {
-        assertTrue(myDAO.rmJeu2Soiree(1,3));
+        assertTrue(myDAO.rmUser2Soiree(1,3));
     }
-    
-    @Test
-    public void testListJeu2Soiree() throws SQLException {
-        assertEquals(2, myDAO.listJeu2Soiree(1).size());
-    }
-    
-    @Test
-    public void testListSoiree2Jeu() throws SQLException {
-        assertEquals(5, myDAO.listSoiree2Jeu(2).size());
-    }
+   
 }

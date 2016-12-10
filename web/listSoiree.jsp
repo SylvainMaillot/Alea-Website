@@ -29,6 +29,7 @@
                         </tr>
                 </c:if>
                 <form action="Soiree" method="POST">
+                <c:set var="id" scope="session" value="${soiree.soireeId}"/>
                         <tr>
                             <td>
                                 ${soiree.nom}
@@ -43,13 +44,27 @@
                                 <input type='hidden' name='nbJoueurMax' value=${soiree.description}>
                             </td>
                             <td>
-                                ${soiree.nbJoueur}
+                                <c:forEach var="user" items="${nbUser}">
+                                    <c:if test="${soiree.soireeId == user.key}"> ${user.value}</c:if>
+                                </c:forEach>
                                 <input type='hidden' name='description' value=${soiree.nbJoueur}>
                             </td>
                             <td>
-                                <input type='hidden' name='soireeID' value=${soiree.soireeId}> 
+                                <input type='hidden' name='soireeID' value=${id}> 
                                 <input type='submit' name='action' value='Editer'>
                                 <input type='submit' name='action' value='Supprimer'>
+                                <c:set var="insc" scope="session" value="0"/>
+                                <c:forEach var="users" items="${listUser}">
+                                    <c:if test="${ id == users.key}">
+                                        <c:forEach var="usersId" items="${users.value}">
+                                                <c:if test="${usersId == utilisateur.userId}">
+                                                    <input type='submit' name='action' value="Se desinscrire">
+                                                    <c:set var="insc" scope="session" value="1"/>
+                                                </c:if>
+                                        </c:forEach>
+                                    </c:if>
+                                </c:forEach>
+                               <c:if test="${insc == 0}"><input type='submit' name='action' value="S'inscrire"> </c:if>
                             </td>
                         </tr>
                     </form>

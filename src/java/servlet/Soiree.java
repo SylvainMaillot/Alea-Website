@@ -7,6 +7,7 @@ package servlet;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
 import dataAccessObject.AccessJeuObject;
+import dataAccessObject.AccessProgrammeObject;
 import dataAccessObject.AccessSoireeObject;
 import dataAccessObject.JeuEntity;
 import dataAccessObject.SoireeEntity;
@@ -19,6 +20,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -63,13 +65,19 @@ public class Soiree extends HttpServlet {
         
         
         AccessSoireeObject dao = new AccessSoireeObject(getDataSource());
+        AccessProgrammeObject apo = new AccessProgrammeObject(getDataSource());
         ArrayList<SoireeEntity> listSoiree;
+        Map<Integer,Integer> nbj = apo.nbUser2Soiree();
+        Map<Integer,ArrayList<Integer>> listUser = apo.listIdUser2Soiree();
         SoireeEntity soiree;
         int soireeID;
         String nom, desc;
         java.util.Date jour;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         UtilisateurEntity User = (UtilisateurEntity) findUserInSession(request);
+        request.setAttribute("nbUser", nbj);
+        request.setAttribute("listUser",listUser);
+        request.setAttribute("utilisateur",User);
         
         switch(request.getParameter("action")){
             case "Accueil":
@@ -112,12 +120,29 @@ public class Soiree extends HttpServlet {
                 request.setAttribute("soirees", listSoiree);
                 request.getRequestDispatcher("listSoiree.jsp").forward(request, response);
                 break;
-                
+            case "S'inscrire":
+                soireeID = Integer.parseInt(request.getParameter("soireeID"));
+                apo.addUser2Soiree(soireeID, User.getUserId());
+                nbj = apo.nbUser2Soiree();
+                listSoiree = dao.listSoiree();
+                listUser = apo.listIdUser2Soiree();
+                request.setAttribute("nbUser", nbj);
+                request.setAttribute("soirees", listSoiree);
+                request.setAttribute("listUser",listUser);
+                request.getRequestDispatcher("listSoiree.jsp").forward(request, response);
+                break;
+            case "Se desinscrire":
+                soireeID = Integer.parseInt(request.getParameter("soireeID"));
+                apo.rmUser2Soiree(soireeID, User.getUserId());
+                nbj = apo.nbUser2Soiree();
+                listSoiree = dao.listSoiree();
+                listUser = apo.listIdUser2Soiree();
+                request.setAttribute("nbUser", nbj);
+                request.setAttribute("soirees", listSoiree);
+                request.setAttribute("listUser",listUser);
+                request.getRequestDispatcher("listSoiree.jsp").forward(request, response);
+                break;
             case "Voir les soirees":
-<<<<<<< HEAD
-=======
-                
->>>>>>> 14cffae89fe3d03b32df134a8b93f42faac3cf58
                 listSoiree = dao.listSoiree();
                 request.setAttribute("soirees", listSoiree);
                 request.getRequestDispatcher("listSoiree.jsp").forward(request, response);

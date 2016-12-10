@@ -14,7 +14,7 @@
                 google.load("visualization", "1", {packages: ["corechart"]});
 
 		// Après le chargement de la page, on fait l'appel AJAX
-		google.setOnLoadCallback(doAjax);
+		
 		
 		   function drawChart(dataArray) {
                             var data = google.visualization.arrayToDataTable(dataArray);
@@ -75,7 +75,7 @@
 			});
 		}
                 
-      
+      google.setOnLoadCallback(doAjax);
 
 	
 		// Fonction qui traite les erreurs de la requête

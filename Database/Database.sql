@@ -42,10 +42,10 @@ CREATE TABLE Soiree( ID INT AUTO_INCREMENT,
 			PRIMARY KEY (ID));
 
 CREATE TABLE Programme(	SoireeID INT,
-			JeuID INT,
+			UtilisateurID INT,
 			FOREIGN KEY (SoireeID) REFERENCES Soiree(ID) ON DELETE CASCADE,
-			FOREIGN KEY (JeuID) REFERENCES Jeu(ID) ON DELETE CASCADE,
-			PRIMARY KEY (SoireeID, JeuID)
+			FOREIGN KEY (UtilisateurID) REFERENCES Utilisateur(ID) ON DELETE CASCADE,
+			PRIMARY KEY (SoireeID, UtilisateurID)
 			);
 
 /*Contraintes d'intégrités
